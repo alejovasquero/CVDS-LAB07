@@ -16,8 +16,6 @@
  */
 package edu.eci.cvds.samples.services.client;
 
-
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
@@ -25,6 +23,9 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper;
+import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
 
 /**
  *
@@ -68,10 +69,12 @@ public class MyBatisExample {
         //cm...
         
         ClienteMapper cm=sqlss.getMapper(ClienteMapper.class);
-        cm.getRecord(1L);
+        System.out.println(cm.consultarClientes());
+        
+        
+        ItemMapper im = sqlss.getMapper(ItemMapper.class);
+        //System.out.println(im.consultarItems());
         sqlss.commit();
-        
-        
         sqlss.close();
 
         
