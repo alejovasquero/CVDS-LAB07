@@ -12,6 +12,48 @@
 	
 	</insert>
 
+	<select parameterType="map" id="consultarItems" resultMap="ItemResult">
+		select
+		ir.id as itemrentado_id,
+		ir.fechainiciorenta as itemrentado_fechainiciorenta,
+		ir.fechafinrenta as itemrentado_fechafinrenta,
+		i.id as item_id,
+		i.nombre as item_nombre,
+		i.descripcion as item_descripcion,
+		i.fechalanzamiento as item_fechalanzamiento,
+		i.tarifaxdia as item_tarifaxdia,
+		i.formatorenta as item_formatorenta,
+		i.genero as item_genero,        
+		ti.id as tipoitem_id,
+		ti.descripcion as tipoitem_descripcion
+		FROM
+		VI_ITEMRENTADO as ir
+		left join VI_ITEMS as i on ir.ITEMS_id=i.id 
+		left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
+	</select>
+
+	<select parameterType="map" id="consultarItem" resultMap="ItemResult">
+		select
+		ir.id as itemrentado_id,
+		ir.fechainiciorenta as itemrentado_fechainiciorenta,
+		ir.fechafinrenta as itemrentado_fechafinrenta,
+		i.id as item_id,
+		i.nombre as item_nombre,
+		i.descripcion as item_descripcion,
+		i.fechalanzamiento as item_fechalanzamiento,
+		i.tarifaxdia as item_tarifaxdia,
+		i.formatorenta as item_formatorenta,
+		i.genero as item_genero,        
+		ti.id as tipoitem_id,
+		ti.descripcion as tipoitem_descripcion
+		FROM
+		VI_ITEMRENTADO as ir
+		left join VI_ITEMS as i on ir.ITEMS_id=i.id 
+		left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
+		WHERE #{it}=i.id
+	</select>
+
+
 	<resultMap type='Item' id='ItemResult'>
 		<id property='id' column='id'/>
 		<result property='nombre' column='nombre'/>

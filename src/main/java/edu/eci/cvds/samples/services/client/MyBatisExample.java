@@ -82,8 +82,9 @@ public class MyBatisExample {
         ItemMapper im = sqlss.getMapper(ItemMapper.class);
         TipoItem tipo = new TipoItem(1, "The Beast");
         Item item=new Item(tipo, 667, "T.K.G", "No lo sé, tú dime", a, 1L, "Clasico", "Humor");
-        im.insertarItem(item);
+        //im.insertarItem(item);
         //System.out.println(im.consultarItems());
+        System.out.println(im.consultarItem(667));
 
 
 
