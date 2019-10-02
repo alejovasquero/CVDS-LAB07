@@ -14,7 +14,37 @@
 		<collection property='rentados' ofType='ItemRentado'  resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemRentadoMapper.ItemRentadoResult' columnPrefix='itemrentado_'></collection>
 	</resultMap>
 
-	
+	<insert parameterType="map" id="agregarItemRentadoACliente">
+		INSERT INTO VI_ITEMRENTADO(id, CLIENTES_documento, ITEMS_id, fechainiciorenta, fechafinrenta) VALUES(666, #{idc}, #{idi}, #{ini}, #{fin})
+	</insert>
+
+	<select parameterType="map" id="consultarCliente" resultMap="ClienteResult">
+		select
+		c.nombre,
+		c.documento,
+		c.telefono,
+		c.direccion,
+		c.email,
+		c.vetado,
+		ir.id as itemrentado_id,
+		ir.fechainiciorenta as itemrentado_fechainiciorenta,
+		ir.fechafinrenta as itemrentado_fechafinrenta,
+		i.id as item_id,
+		i.nombre as item_nombre,
+		i.descripcion as item_descripcion,
+		i.fechalanzamiento as item_fechalanzamiento,
+		i.tarifaxdia as item_tarifaxdia,
+		i.formatorenta as item_formatorenta,
+		i.genero as item_genero,        
+		ti.id as tipoitem_id,
+		ti.descripcion as tipoitem_descripcion
+		FROM VI_CLIENTES as c 
+		left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
+		left join VI_ITEMS as i on ir.ITEMS_id=i.id 
+		left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
+		WHERE #{idel}=c.documento
+	</select>
+
 	<select parameterType="map" id="consultarClientes" resultMap="ClienteResult">
 			select
 		c.nombre,
