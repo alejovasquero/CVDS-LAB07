@@ -5,7 +5,12 @@
   
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper">
   
-
+	<insert parameterType='map' id='insertarItem'>
+		
+		INSERT INTO VI_ITEMS(id, nombre, descripcion, fechalanzamiento, tarifaxdia, formatorenta, genero, TIPOITEM_id) 
+		VALUES(#{ite.id}, #{ite.nombre}, #{ite.descripcion}, #{ite.fechaLanzamiento}, #{ite.tarifaxDia},#{ite.formatoRenta} ,#{ite.genero}, #{ite.tipo.id})
+	
+	</insert>
 
 	<resultMap type='Item' id='ItemResult'>
 		<id property='id' column='id'/>

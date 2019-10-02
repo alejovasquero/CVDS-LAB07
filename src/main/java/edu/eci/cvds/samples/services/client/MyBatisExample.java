@@ -28,6 +28,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
+import edu.eci.cvds.samples.entities.Item;
+import edu.eci.cvds.samples.entities.TipoItem;
 
 /**
  *
@@ -75,9 +77,12 @@ public class MyBatisExample {
         System.out.println(cm.consultarClientes());
         System.out.println(cm.consultarCliente(5555));
         Date a = new Date();
-        cm.agregarItemRentadoACliente(123456,85 ,  a, a);        
+        //cm.agregarItemRentadoACliente(123456,85 ,  a, a);        
 
         ItemMapper im = sqlss.getMapper(ItemMapper.class);
+        TipoItem tipo = new TipoItem(1, "The Beast");
+        Item item=new Item(tipo, 667, "T.K.G", "No lo sé, tú dime", a, 1L, "Clasico", "Humor");
+        im.insertarItem(item);
         //System.out.println(im.consultarItems());
 
 
