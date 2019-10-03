@@ -42,15 +42,18 @@
 		left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
 		left join VI_ITEMS as i on ir.ITEMS_id=i.id 
 		left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
+		WHERE documento=#{idel} 
 		
 	</select>
 
 	<insert parameterType="map" id="insertarCliente">
 		INSERT INTO VI_CLIENTES values (#{cli.id}, #{cli.nombre}, #{cli.telefono}, #{cli.direccion}, #{cli.email}, #{cli.vetado})
 	</insert>
-
-
-
+	
+	<update parameterType='map' id='vetarCliente'>
+		update VI_CLIENTES set vetado=#{estado} where documento=#{docu};
+	</update>
+	
 	<select parameterType="map" id="consultarClientes" resultMap="ClienteResult">
 			select
 		c.nombre,

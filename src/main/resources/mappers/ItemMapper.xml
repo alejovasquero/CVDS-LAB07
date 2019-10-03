@@ -52,8 +52,27 @@
 		left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
 		WHERE #{it}=i.id
 	</select>
-
-
+	
+	<select parameterType="map" id="valorMultaRetrasoxDia" resultMap="ItemResult">
+		select fechafinrenta,tarifaxdia
+		FROM VI_ITEMS,VI_ITEMRENTADO
+		WHERE VI_ITEMS.id=VI_ITEMRENTADO.ITEMS_id and VI_ITEMS.id=#{itemId};
+	</select>
+	
+	<select parameterType="map" id="consultarItemsDisponibles" resultMap="ItemResult">
+		select *
+		FROM VI_ITEMS
+		WHERE id not in (select ITEMS_id from VI_ITEMRENTADO);
+	</select>
+	
+	<select parameterType="map" id="consultarCostoAlquiler" resultMap="ItemResult">
+		select tarifaxdia from VI_ITEMS where id=#{iditem};
+	</select>
+	
+	<update parameterType='map' id='actualizarTarifaItem'>
+		update VI_ITEMS set tarifaxdia=#{tarifa} where id=#{id};
+	</update>
+	
 	<resultMap type='Item' id='ItemResult'>
 		<id property='id' column='id'/>
 		<result property='nombre' column='nombre'/>
