@@ -26,7 +26,11 @@
             <artifactId>mybatis</artifactId>
             <version>3.4.5</version>
         </dependency>
-
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>4.0</version>
+		</dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -67,6 +71,7 @@
                         <artifactId>h2</artifactId> 
                         <version>1.4.184</version>
                     </dependency>
+					
                 </dependencies>
                 <configuration>
                     <driver>org.h2.Driver</driver>                    

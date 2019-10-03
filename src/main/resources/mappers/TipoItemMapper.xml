@@ -9,5 +9,21 @@
 		<result property='descripcion' column='descripcion'/>
 	</resultMap>
 
-                
+<insert id="insertarTipoItem" parameterType="map">
+	INSERT INTO VI_TIPOITEM VALUES(#{tit.id},#{tit.descripcion});
+</insert>
+
+<insert id="addTipoItem" parameterType="map">
+	INSERT INTO VI_TIPOITEM(descripcion) VALUES(#{tit.descripcion});
+</insert>
+
+<select id="getTipoItem" parameterType="map" resultMap="TipoItemResult">
+	select * from VI_TIPOITEM
+	<where>
+		<if test="it != null">
+			id=#{id}
+		</if>
+	</where>
+
+</select>   
 </mapper>
