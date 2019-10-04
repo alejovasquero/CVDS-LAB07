@@ -30,6 +30,11 @@
 		VI_ITEMRENTADO as ir
 		left join VI_ITEMS as i on ir.ITEMS_id=i.id 
 		left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
+		<where>
+			<if test="#{it} != null" >
+				#{it}=i.id
+			</if>
+		</where>
 	</select>
 
 	<select parameterType="map" id="consultarItem" resultMap="ItemResult">

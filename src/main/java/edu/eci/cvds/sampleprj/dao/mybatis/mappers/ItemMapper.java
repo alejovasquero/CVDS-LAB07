@@ -14,11 +14,18 @@ import edu.eci.cvds.samples.entities.Item;
 public interface ItemMapper {
     
     
-    public List<Item> consultarItems();        
+    public List<Item> consultarItem();        
     
     public Item consultarItem(@Param("it") int id);
     
     public void insertarItem(@Param("ite") Item it);
+	
+	//no sé que retornaria esta consulta
+	public List<Object> valorMultaRetrasoxDia(@Param("itemId")int id);
 
-        
+    public List<Item> consultarItemsDisponibles();
+	
+	public long consultarCostoAlquiler(@Param("itemId") int iditem);
+	
+	public void actualizarTarifaItem(@Param("id")int id, @Param("tarifa")long tarifa);
 }

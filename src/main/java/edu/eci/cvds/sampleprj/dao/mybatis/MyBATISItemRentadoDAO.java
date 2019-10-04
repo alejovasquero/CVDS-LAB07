@@ -1,0 +1,33 @@
+package edu.eci.cvds.sampleprj.dao.mybatis;
+
+import edu.eci.cvds.sampleprj.dao.ItemRentadoDAO;
+import edu.eci.cvds.sampleprj.dao.PersistenceException;
+import java.util.List;
+import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemRentadoMapper;
+import edu.eci.cvds.samples.entities.ItemRentado;
+import com.google.inject.Inject;
+import java.sql.Date;
+
+public class MyBATISItemRentadoDAO implements ItemRentadoDAO{
+	
+	@Inject
+	private ItemRentadoMapper itemRentadoMapper;
+	
+	@Override
+	public ItemRentado load(int id) throws PersistenceException{
+		try{
+			return itemRentadoMapper.getItemRentado(id);
+		}catch(org.apache.ibatis.exceptions.PersistenceException e){
+			throw new PersistenceException("Error al consultar el item rentado "+id,e);
+		}    
+	}
+	
+	@Override
+	public void save(long docu,int itemId,Date fechaIni,Date fechaFin) throws PersistenceException{
+		try{
+			itemRentadoMapper.insertItemRentado(docu,itemId,fechaIni,fechaFin);
+		}catch(org.apache.ibatis.exceptions.PersistenceException e){
+			throw new PersistenceException("Error al registrar el alquiler del producto "+itemId+" por el cliente "+docu,e);
+		}
+	}
+}

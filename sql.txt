@@ -1,4 +1,4 @@
-//Consultas para Servicios Alquiler Impl (no incluye las operaciones que se deben realizar por fuera)
+﻿//Consultas para Servicios Alquiler Impl (no incluye las operaciones que se deben realizar por fuera)
 //valorMultaRetrasoxDia (En ItemMapper)
 Despues de recibir la fechafinrenta, se compara con la fecha actual y se obtiene el npumero de dias
 Se multiplica el número de dias por la tarifaxdia y ese es el resultado
@@ -7,12 +7,10 @@ Se multiplica el número de dias por la tarifaxdia y ese es el resultado
 //consultarItemsDisponibles (En ItemMapper)
 
 
-//registrarAlquilerCliente (Se debe crear el mapper de ItemRentado para ponerlo)
-insert into VI_ITEM_RENTADO(CLIENTES_documento,ITEMS_id,fechainiciorenta,fechafinrenta) 
-values(#{docu},#{item.id},#{date},#{date+numdias}); //insertar en item y cliente si no existen
+//registrarAlquilerCliente (En ItemRentadoMapper)
+Falta arreglar el error de incopatibilidad entre java.sql.Date y java.util.Date
 
 //consultarCostoAlquiler (En ItemMapper)
-Despues de recibir tarifaxdia se multiplica por el numero de dias y eso es el resultado
 
 //actualizarTarifaItem (En ItemMapper)
 

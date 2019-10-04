@@ -12,7 +12,10 @@
 		<association property="item" javaType="Item" columnPrefix='item_' resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult"></association>      
 	</resultMap>
 	
-
+	<insert parameterType='map' id='insertItemRentado'>
+		INSERT INTO VI_ITEM_RENTADO(CLIENTES_documento,ITEMS_id,fechainiciorenta,fechafinrenta) 
+		values(#{docu},#{itemId},#{fechaIni},#{fechaFin}); 
+	</insert>
 
                 
 </mapper>

@@ -2,31 +2,32 @@ package edu.eci.cvds.samples.services.impl;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import edu.eci.cvds.sampleprj.dao.ClienteDAO;
-import edu.eci.cvds.sampleprj.dao.ItemDAO;
-import edu.eci.cvds.sampleprj.dao.TipoItemDAO;
-import edu.eci.cvds.sampleprj.dao.PersistenceException;
+import edu.eci.cvds.sampleprj.dao.*;
 
-import edu.eci.cvds.samples.entities.Cliente;
-import edu.eci.cvds.samples.entities.Item;
-import edu.eci.cvds.samples.entities.ItemRentado;
-import edu.eci.cvds.samples.entities.TipoItem;
+import edu.eci.cvds.samples.entities.*;
+
 import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquiler;
 import java.sql.Date;
 import java.util.List;
+import java.util.Calendar;
 
 @Singleton
 public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Inject
-   private ItemDAO itemDAO;
    private ClienteDAO clienteDAO;
+   private ItemRentadoDAO itemRentadoDAO;
+   private ItemDAO itemDAO;
    private TipoItemDAO tipoItemDAO;
-
+   
    @Override
-   public int valorMultaRetrasoxDia(int itemId) {
-       throw new UnsupportedOperationException("Not supported yet.");
+   public int valorMultaRetrasoxDia(int itemId) throws ExcepcionServiciosAlquiler{
+       try {
+           return itemDAO.valormultaretraso(itemId);
+       } catch (PersistenceException ex) {
+           throw new ExcepcionServiciosAlquiler("Error al consultar el item "+itemId,ex);
+       }
    }
 
    @Override
@@ -66,8 +67,12 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    }
 
    @Override
-   public List<Item> consultarItemsDisponibles() {
-       throw new UnsupportedOperationException("Not supported yet.");
+   public List<Item> consultarItemsDisponibles() throws ExcepcionServiciosAlquiler{
+       try {
+           return itemDAO.consultarItemsDisponibles();
+       } catch (PersistenceException ex) {
+           throw new ExcepcionServiciosAlquiler("Error al consultar los items disponibles",ex);
+       }
    }
 	//falta
    @Override
@@ -95,7 +100,14 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Override
    public void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+       try {
+		   Calendar calendar = Calendar.getInstance();
+		   calendar.setTime(date);
+		   calendar.add(Calendar.DAY_OF_YEAR,numdias);
+           itemRentadoDAO.save(docu,item.getId(),date,calendar.getTime());
+		} catch (PersistenceException ex) {
+           throw new ExcepcionServiciosAlquiler("Error al registrar el alquiler del producto "+item.toString()+" por el cliente "+docu,ex);
+		}
    }
 
    @Override
@@ -109,16 +121,28 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Override
    public long consultarCostoAlquiler(int iditem, int numdias) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+       try {
+           return itemDAO.consultarCostoAlquiler(iditem,numdias);
+       } catch (PersistenceException ex) {
+           throw new ExcepcionServiciosAlquiler("Error al consultar el item "+iditem,ex);
+       }
    }
 
    @Override
    public void actualizarTarifaItem(int id, long tarifa) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+       try {
+           itemDAO.actualizarTarifaItem(id,tarifa);
+       } catch (PersistenceException ex) {
+           throw new ExcepcionServiciosAlquiler("Error al actualizar la tarifa del item "+id,ex);
+       }
    }
    @Override
    public void registrarItem(Item i) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       try {
+           itemDAO.save(i);
+       } catch (PersistenceException ex) {
+           throw new ExcepcionServiciosAlquiler("Error al registrar el item "+i.toString(),ex);
+       }
    }
 
    @Override
