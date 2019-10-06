@@ -2,6 +2,9 @@ package edu.eci.cvds.sampleprj.dao.mybatis;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+
+import org.mybatis.guice.transactional.Transactional;
+
 import edu.eci.cvds.sampleprj.dao.ItemDAO;
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.Item;
@@ -13,7 +16,8 @@ public class MyBATISItemDAO implements ItemDAO{
 
   @Inject
   private ItemMapper itemMapper;    
-
+  
+  @Transactional
   @Override
   public void save(Item it) throws PersistenceException{
 	try{
@@ -60,7 +64,7 @@ public class MyBATISItemDAO implements ItemDAO{
 		throw new PersistenceException("Error al consultar el costo del alquiler",e);
 	}
   }
-  
+  @Transactional
   @Override
   public void actualizarTarifaItem(int id, long tarifa) throws PersistenceException{
 	try{

@@ -6,6 +6,9 @@ import java.util.List;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemRentadoMapper;
 import edu.eci.cvds.samples.entities.ItemRentado;
 import com.google.inject.Inject;
+
+import org.mybatis.guice.transactional.Transactional;
+
 import java.sql.Date;
 
 public class MyBATISItemRentadoDAO implements ItemRentadoDAO{
@@ -22,6 +25,7 @@ public class MyBATISItemRentadoDAO implements ItemRentadoDAO{
 		}    
 	}
 	
+	@Transactional
 	@Override
 	public void save(long docu,int itemId,Date fechaIni,Date fechaFin) throws PersistenceException{
 		try{
