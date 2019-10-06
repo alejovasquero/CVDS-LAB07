@@ -8,11 +8,15 @@ import java.util.List;
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import com.google.inject.Inject;
 
+import org.mybatis.guice.transactional.Transactional;
+
 public class MyBATISClienteDAO implements ClienteDAO{
 
 	@Inject
 	private ClienteMapper clienteMapper;
-    
+	
+	
+	@Transactional
 	@Override
 	public void save(Cliente cli) throws PersistenceException{
 		try{
@@ -21,6 +25,7 @@ public class MyBATISClienteDAO implements ClienteDAO{
 			throw new PersistenceException("Error al registrar el cliente "+cli.toString(),e);
 		}        
 	}
+	
 	
 	@Override
 	public Cliente load(long id) throws PersistenceException {
@@ -31,6 +36,7 @@ public class MyBATISClienteDAO implements ClienteDAO{
 		}
 	}
 	
+
 	@Override
 	public List<Cliente> consultarClientes() throws PersistenceException{
 		try{
@@ -40,6 +46,7 @@ public class MyBATISClienteDAO implements ClienteDAO{
 		}
 	}
 	
+	
 	@Override
 	public List<ItemRentado> loadItems(long idcliente) throws PersistenceException{
 		try{
@@ -47,5 +54,17 @@ public class MyBATISClienteDAO implements ClienteDAO{
 		}catch(org.apache.ibatis.exceptions.PersistenceException e){
 			throw new PersistenceException("Error al consultar el cliente "+idcliente,e);
 		}
+	}
+
+	@Transactional
+	@Override
+	public void vetarCliente(long docu, boolean estado) throws PersistenceException {
+		try{
+			clienteMapper.vetarCliente(docu, estado);
+		}catch(org.apache.ibatis.exceptions.PersistenceException e){
+			throw new PersistenceException("Error al vetar Cliente "+docu,e);
+		}
+		
+
 	}
 }

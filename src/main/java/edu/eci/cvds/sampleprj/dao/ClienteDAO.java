@@ -15,4 +15,6 @@ public interface ClienteDAO{
 	public List<Cliente> consultarClientes() throws PersistenceException;
 	
 	public List<ItemRentado> loadItems(long idcliente) throws PersistenceException;
+
+	public void vetarCliente(long docu, boolean estado) throws PersistenceException;
 }

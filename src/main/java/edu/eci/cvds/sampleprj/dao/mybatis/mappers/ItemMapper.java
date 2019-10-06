@@ -22,6 +22,9 @@ public interface ItemMapper {
 	
 	//no sé que retornaria esta consulta
 	public List<Object> valorMultaRetrasoxDia(@Param("itemId")int id);
+    //PREGUNTAR
+
+
 
     public List<Item> consultarItemsDisponibles();
 	

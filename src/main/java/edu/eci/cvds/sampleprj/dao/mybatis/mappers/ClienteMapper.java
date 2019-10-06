@@ -35,6 +35,8 @@ public interface ClienteMapper {
 	
 	public List<ItemRentado> consultarItems(long idcliente);
 	
-	public void insertarCliente(@Param("cli")Cliente cli);
+    public void insertarCliente(@Param("cli")Cliente cli);
+    
+    public void vetarCliente(@Param("docu") long docu, @Param("estado") boolean estado);
     
 }
