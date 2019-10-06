@@ -1,5 +1,6 @@
 package edu.eci.cvds.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -15,8 +16,10 @@ import edu.eci.cvds.samples.services.ServiciosAlquilerFactory;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Before;
 import org.junit.Test;
+import org.mybatis.guice.transactional.Transactional;
+import org.junit.After;
 import org.junit.Assert;
-
+@Transactional
 public class ServiciosAlquilerTest {
 
     @Inject
@@ -29,16 +32,37 @@ public class ServiciosAlquilerTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws ExcepcionServiciosAlquiler {
+        serviciosAlquiler.registrarCliente(new Cliente("el macho", 2020202, "22222", "cll 666","Elmacho@callme.com"));
     }
 
     @Test
     public void deberiaExistirCliente() {
         try {
-            Cliente a = serviciosAlquiler.consultarCliente(5555);
-            assertE
+            Cliente a = serviciosAlquiler.consultarCliente(2020202);
+            assertEquals(a.getNombre(), "el macho");
         } catch (Exception e) {
-            //TODO: handle exception
+            e.printStackTrace();
+            assertTrue(false);
         }
     }
+
+    @Test
+    public void deberiaNoExistirCliente(){
+        try {
+            
+            Cliente a = serviciosAlquiler.consultarCliente(111);
+            assertTrue(a==null);
+            
+        } catch (Exception e) {
+            
+        }
+    }
+
+    @After
+    public void cerrar(){
+        //sqlSession.commit();
+        //sqlSession.close();
+    }
+
 }

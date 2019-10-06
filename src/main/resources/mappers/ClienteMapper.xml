@@ -49,7 +49,7 @@
 	</select>
 
 	<insert parameterType="map" id="insertarCliente">
-		INSERT INTO VI_CLIENTES values (#{cli.id}, #{cli.nombre}, #{cli.telefono}, #{cli.direccion}, #{cli.email}, #{cli.vetado})
+		INSERT INTO VI_CLIENTES values (#{cli.documento}, #{cli.nombre}, #{cli.telefono}, #{cli.direccion}, #{cli.email}, #{cli.vetado})
 	</insert>
 	
 	<update parameterType='map' id='vetarCliente'>

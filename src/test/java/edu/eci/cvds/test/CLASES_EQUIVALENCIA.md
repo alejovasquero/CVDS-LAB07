@@ -1,5 +1,5 @@
 # CLASES DE EQUIVALENCIA: ServiciosAlquiler.java
-
+	//Pendiente
 	a) public abstract int valorMultaRetrasoxDia(int itemId) throws ExcepcionServiciosAlquiler;
 		- 1) Excepciones
 		~~~
@@ -55,6 +55,7 @@
 		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|  (1,21,66) (2000, 25, 77) |
 
 
+	//OK
 	b) public abstract Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler;
 		- 1) Excepciones
 		~~~
@@ -62,7 +63,7 @@
 		* @obj Retorna el cliente con el documento dado
 		* @param docu Documento del cliente a consultar
 		* @return cliente con documento docu
-		* @throws ExcepcionServiciosAlquiler si el cliente no existe
+		* @throws ExcepcionServiciosAlquiler
 		*/
 	    public abstract Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler;
 		~~~
@@ -70,44 +71,26 @@
 
 		| Número  | Clase de equivalencia (en lenguaje natural o matemático) |   Resultado correcto /incorrecto. |   
 		| --- | --- |---|
-		| 1  | Parámetros Inválidos |   Resultado incorrecto. |   
-		| 2  | Parámetros Correctos y descuento por antelación|   Resultado correcto |   
-		| 3  | Parámetros Correctos y descuento por menor de edad|   Resultado correcto |   
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   Resultado correcto |   
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad|   Resultado correcto |   
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|   Resultado correcto |   
+		| 1  | El cliente existe |   El cliente esperado |   
+		| 2  | El cliente no existe|   null |     
 		3) Casos de pruebas
 
 		| Número  | Clase de equivalencia  |   Prueba |  Resultado| 
 		| --- | --- |---|---|
-		| 1  | Parámetros Inválidos |   (-1546666666666666666666666666666666666,2,-1) |   ExcepcionParametrosInvalidos   |
-		| 2  | Parámetros Correctos y descuento por antelación|   (666, 21, 30) |  566.1    |   
-		| 3  | Parámetros Correctos y descuento por menor de edad|   (1000, 12, 4) |  950|   
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   (10000, 13,69) |  9200 |    
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad|  (5000, 24, 10) |4000 |  
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|  (2000, 25, 77) | 1540   |
+		| 1  | El cliente existe |    10999900099 |El cliente esperado |   
+		| 2  | El cliente no existe|   10999900050 | null| 
+		
 
-		4) Limites de equivalencia
-
-		| Número  | Clase de equivalencia |   Limites |
-		| --- | --- |---|
-		| 1  | Parámetros Inválidos |   ...(0,0,0) | 
-		| 2  | Parámetros Correctos y descuento por antelación|   (1,21,18)  (1,21,65) |  
-		| 3  | Parámetros Correctos y descuento por menor de edad|  (1,0,0)  (1,20,17) |  
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   (1,0,66)... |   
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad| (1,21,0)  (1,21,17)  |  
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|  (1,21,66)...  |
+		4) Limites de equivalencia: No hay límites
 
 		5) Casos de prueba especificos
 
-		| Número  | Clase de equivalencia |   Limites |
-		| --- | --- |---|
-		| 1  | Parámetros Inválidos |   (0,0,0) (-1546666666666666666666666666666666666,2,-1)| 
-		| 2  | Parámetros Correctos y descuento por antelación|   (1,21,18)  (1,21,65)  (666, 21, 30)|  
-		| 3  | Parámetros Correctos y descuento por menor de edad|  (1,0,0)  (1,20,17)  (1000, 12, 4) |  
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   (1,0,66) (10000, 13,69) |   
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad| (1,21,0)  (1,21,17)  (5000, 24, 10) |  
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|  (1,21,66) (2000, 25, 77) |
+		| Número  | Clase de equivalencia  |   Prueba |  Resultado| 
+		| --- | --- |---|---|
+		| 1  | El cliente existe |    10999900099 |El cliente esperado |   
+		| 2  | El cliente no existe|   10999900050 | null|  
+		
+		
 	c) public abstract List<ItemRentado> consultarItemsCliente(long idcliente) throws ExcepcionServiciosAlquiler;
 		- 1) Excepciones
 		~~~

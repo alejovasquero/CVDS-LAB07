@@ -19,7 +19,7 @@ public interface ServiciosAlquiler {
     * @obj Retorna el cliente con el documento dado
     * @param docu Documento del cliente a consultar
     * @return cliente con documento docu
-    * @throws ExcepcionServiciosAlquiler si el cliente no existe
+    * @throws ExcepcionServiciosAlquiler
     */
    public abstract Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler;
 
