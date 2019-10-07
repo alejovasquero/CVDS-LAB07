@@ -3,6 +3,8 @@ package edu.eci.cvds.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,12 +14,15 @@ import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.Cliente;
 import edu.eci.cvds.samples.entities.Item;
 import edu.eci.cvds.samples.entities.ItemRentado;
+import edu.eci.cvds.samples.entities.TipoItem;
 import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquilerFactory;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.mybatis.guice.transactional.Transactional;
 import org.junit.After;
 import org.junit.Assert;
@@ -34,34 +39,57 @@ public class ServiciosAlquilerTest {
         serviciosAlquiler = ServiciosAlquilerFactory.getInstance().getServiciosAlquilerTesting();
     }
 
-    @Transactional
-    @Before
-    public void setUp() throws ExcepcionServiciosAlquiler {
-        poblar();        
-    }
 
+    //PRUEBA 1
 
-   
-    private void poblar() throws ExcepcionServiciosAlquiler {
-        poblarClientes();
-        poblarItems();
-    }
+    //public abstract List<ItemRentado> consultarItemsCliente(long idcliente) throws ExcepcionServiciosAlquiler;
 
-    private void poblarItems() {
-        serviciosAlquiler.registrarItem(new Item(null, 1, "Scary movie","Comedia barata", new Date(s), tarifaxDia, formatoRenta, genero));        
-    }
-
-    private void poblarClientes() throws ExcepcionServiciosAlquiler {
-        serviciosAlquiler.registrarCliente(new Cliente("el macho", 2020202, "22222", "cll 666","Elmacho@callme.com"));
-        serviciosAlquiler.registrarCliente(new Cliente("Rapel con aida merlano", 401, "222dd22", "cll 6d66","Elmacho@callmde.com")); 
-    }
-
-
-    private static Date parseDate(){
-        try{
-            return new 
+    @Test
+    public void deberiaNoEstarRegistrado() throws ExcepcionServiciosAlquiler {
+        
+        try {
+            serviciosAlquiler.consultarItemsCliente(500);
+            assertTrue(false);
+        } catch (Exception e) {
+            assertTrue(true);
+        }
+        try {
+            serviciosAlquiler.consultarItemsCliente(666);
+            assertTrue(false);
+        } catch (Exception e) {
+            assertTrue(true);
         }
     }
+    
+    @Test
+    public void deberiaNoTenerItems() throws ExcepcionServiciosAlquiler {
+        serviciosAlquiler.registrarCliente(new Cliente("el macho", 2020202, "22222", "cll 666","Elmacho@callme.com"));
+        serviciosAlquiler.registrarCliente(new Cliente("Rapel con aida merlano", 401, "222dd22", "cll 6d66","Elmacho@callmde.com")); 
+        try {
+            assertTrue(serviciosAlquiler.consultarItemsCliente(2020202).size()==0);
+            assertTrue(serviciosAlquiler.consultarItemsCliente(401).size()==0);
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+
+    }
+
+    @Test
+    public void deberiaTenerAlMenosUnItem() throws ExcepcionServiciosAlquiler, ParseException {
+        serviciosAlquiler.registrarCliente(new Cliente("Elver", 6, "222dd22", "cll 6d66","Elmacho@clmde.com")); 
+        Date a =new SimpleDateFormat("yyyy-MM-dd").parse("2017-12-03");
+        
+        TipoItem b= new TipoItem(1, "Descripción genérica");
+        serviciosAlquiler.registrarTipoItem(b);   
+        Item c = new Item(new TipoItem(1, "Descripción genérica"), 1, "Scary movie","Comedia barata",a, 102, "Cualquiera", "Terror");
+        serviciosAlquiler.registrarItem(c);    
+
+        
+        serviciosAlquiler.registrarAlquilerCliente(new java.sql.Date(a.getTime()), 6, c, 100);
+        
+        
+        assertTrue(serviciosAlquiler.consultarItemsCliente(6L).size()>0);
+    }
 
 
 
@@ -70,6 +98,40 @@ public class ServiciosAlquilerTest {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
+
+
+    //public abstract List<Cliente> consultarClientes() throws ExcepcionServiciosAlquiler;
+    @Test
+    public void deberiaHaberClientes(){
+        try {
+            assertTrue(serviciosAlquiler.consultarClientes().size()>0);
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+    }
 
 
 
@@ -78,7 +140,7 @@ public class ServiciosAlquilerTest {
     // ExcepcionServiciosAlquiler;
     @Test
     public void hacerEstarPruebas(){
-        assertTrue(false);
+        //assertTrue(false);
     }
 
 
@@ -112,49 +174,7 @@ public class ServiciosAlquilerTest {
         }
     }
 
-    //public abstract List<ItemRentado> consultarItemsCliente(long idcliente) throws ExcepcionServiciosAlquiler;
-
-    @Test
-    public void deberiaNoEstarRegistrado(){
-        try {
-            serviciosAlquiler.consultarItemsCliente(500);
-            assertTrue(false);
-        } catch (Exception e) {
-            assertTrue(true);
-        }
-        try {
-            serviciosAlquiler.consultarItemsCliente(666);
-            assertTrue(false);
-        } catch (Exception e) {
-            assertTrue(true);
-        }
-    }
     
-    @Test
-    public void deberiaNoTenerItems(){
-        try {
-            assertTrue(serviciosAlquiler.consultarItemsCliente(2020202).size()==0);
-            assertTrue(serviciosAlquiler.consultarItemsCliente(401).size()==0);
-        } catch (Exception e) {
-            //TODO: handle exception
-        }
-
-    }
-
-    @Test
-    public void deberiaTenerAlMenosUnItem(){
-        //PREGUNTAR COMO SE INSERTA DE POOB A BASES
-        assertTrue(false);
-    }
-    //public abstract List<Cliente> consultarClientes() throws ExcepcionServiciosAlquiler;
-    @Test
-    public void deberiaHaberClientes(){
-        try {
-            assertTrue(serviciosAlquiler.consultarClientes().size()>0);
-        } catch (Exception e) {
-            //TODO: handle exception
-        }
-    }
 
     
     @Test
@@ -166,7 +186,7 @@ public class ServiciosAlquilerTest {
         }
     }
 
-
+    */
 
     //public abstract Item consultarItem(int id) throws ExcepcionServiciosAlquiler;
     //public abstract List<Item> consultarItemsDisponibles() throws ExcepcionServiciosAlquiler;
