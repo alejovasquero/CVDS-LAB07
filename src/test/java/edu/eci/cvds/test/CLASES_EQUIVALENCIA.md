@@ -1,4 +1,5 @@
 # CLASES DE EQUIVALENCIA: ServiciosAlquiler.java
+## Cada caso de prueba está basado en supuestos de información de la base de datos
 	//Pendiente
 	a) public abstract int valorMultaRetrasoxDia(int itemId) throws ExcepcionServiciosAlquiler;
 		- 1) Excepciones
@@ -77,7 +78,7 @@
 
 		| Número  | Clase de equivalencia  |   Prueba |  Resultado| 
 		| --- | --- |---|---|
-		| 1  | El cliente existe |    10999900099 |El cliente esperado |   
+		| 1  | El cliente existe |    2020202|"el macho" |   
 		| 2  | El cliente no existe|   10999900050 | null| 
 		
 
@@ -85,10 +86,10 @@
 
 		5) Casos de prueba especificos
 
-		| Número  | Clase de equivalencia  |   Prueba |  Resultado| 
+		| Número  | Clase de equivalencia |   Limites |
 		| --- | --- |---|---|
-		| 1  | El cliente existe |    10999900099 |El cliente esperado |   
-		| 2  | El cliente no existe|   10999900050 | null|  
+		| 1  | El cliente existe |    2020202, 401 |   
+		| 2  | El cliente no existe|   500, 666 |
 		
 		
 	c) public abstract List<ItemRentado> consultarItemsCliente(long idcliente) throws ExcepcionServiciosAlquiler;
@@ -99,7 +100,7 @@
 	    * @param idcliente identificador del cliente
 	    * @return el litado de detalle de los items rentados por el cliente
 	    * identificado con 'idcliente'
-	    * @throws ExcepcionServiciosAlquiler si el cliente no esta registrado
+	    * @throws ExcepcionServiciosAlquiler si el cliente no está registrado
 	    */
 	    public abstract List<ItemRentado> consultarItemsCliente(long idcliente) throws ExcepcionServiciosAlquiler;
 		~~~
@@ -107,44 +108,33 @@
 
 		| Número  | Clase de equivalencia (en lenguaje natural o matemático) |   Resultado correcto /incorrecto. |   
 		| --- | --- |---|
-		| 1  | Parámetros Inválidos |   Resultado incorrecto. |   
-		| 2  | Parámetros Correctos y descuento por antelación|   Resultado correcto |   
-		| 3  | Parámetros Correctos y descuento por menor de edad|   Resultado correcto |   
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   Resultado correcto |   
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad|   Resultado correcto |   
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|   Resultado correcto |   
+		| 1  | No registrado |   ExcepcionServiciosAlquiler |   
+		| 2  | Registrado y sin items|   Sin items |   
+		| 3  | Registrado y con items|   Tiene al menos un item |   
+		  
 		3) Casos de pruebas
 
 		| Número  | Clase de equivalencia  |   Prueba |  Resultado| 
 		| --- | --- |---|---|
-		| 1  | Parámetros Inválidos |   (-1546666666666666666666666666666666666,2,-1) |   ExcepcionParametrosInvalidos   |
-		| 2  | Parámetros Correctos y descuento por antelación|   (666, 21, 30) |  566.1    |   
-		| 3  | Parámetros Correctos y descuento por menor de edad|   (1000, 12, 4) |  950|   
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   (10000, 13,69) |  9200 |    
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad|  (5000, 24, 10) |4000 |  
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|  (2000, 25, 77) | 1540   |
+		| 1  | No registrado | 500, 666 |ExcepcionServiciosAlquiler |   
+		| 2  | Registrado y sin items|  2020202, 401 |0 items |   
+		| 3  | Registrado y con items|  1,2 |1 items y 2 items |  
 
-		4) Limites de equivalencia
+		4) Limites de equivalencia: No hay limites
 
 		| Número  | Clase de equivalencia |   Limites |
 		| --- | --- |---|
-		| 1  | Parámetros Inválidos |   ...(0,0,0) | 
-		| 2  | Parámetros Correctos y descuento por antelación|   (1,21,18)  (1,21,65) |  
-		| 3  | Parámetros Correctos y descuento por menor de edad|  (1,0,0)  (1,20,17) |  
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   (1,0,66)... |   
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad| (1,21,0)  (1,21,17)  |  
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|  (1,21,66)...  |
+		| 1  | No registrado | --- |
+		| 2  | Registrado y sin items|  --- |
+		| 3  | Registrado y con items|  --- | 
 
 		5) Casos de prueba especificos
 
 		| Número  | Clase de equivalencia |   Limites |
 		| --- | --- |---|
-		| 1  | Parámetros Inválidos |   (0,0,0) (-1546666666666666666666666666666666666,2,-1)| 
-		| 2  | Parámetros Correctos y descuento por antelación|   (1,21,18)  (1,21,65)  (666, 21, 30)|  
-		| 3  | Parámetros Correctos y descuento por menor de edad|  (1,0,0)  (1,20,17)  (1000, 12, 4) |  
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   (1,0,66) (10000, 13,69) |   
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad| (1,21,0)  (1,21,17)  (5000, 24, 10) |  
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|  (1,21,66) (2000, 25, 77) |
+		| 1  | No registrado | 500, 666 |  
+		| 2  | Registrado y sin items|  2020202, 401 | 
+		| 3  | Registrado y con items|  1,2 |//PREGUNTAR_POR_REGISTRAR_ITEM
 
 	d) public abstract List<Cliente> consultarClientes() throws ExcepcionServiciosAlquiler;
 		- 1) Excepciones
@@ -160,45 +150,26 @@
 
 		| Número  | Clase de equivalencia (en lenguaje natural o matemático) |   Resultado correcto /incorrecto. |   
 		| --- | --- |---|
-		| 1  | Parámetros Inválidos |   Resultado incorrecto. |   
-		| 2  | Parámetros Correctos y descuento por antelación|   Resultado correcto |   
-		| 3  | Parámetros Correctos y descuento por menor de edad|   Resultado correcto |   
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   Resultado correcto |   
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad|   Resultado correcto |   
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|   Resultado correcto |   
+		| 1  | No hay clientes |   0 |   
+		| 2  | Hay mas de un cliente|   length>0 |   
+		   
 		3) Casos de pruebas
 
 		| Número  | Clase de equivalencia  |   Prueba |  Resultado| 
 		| --- | --- |---|---|
-		| 1  | Parámetros Inválidos |   (-1546666666666666666666666666666666666,2,-1) |   ExcepcionParametrosInvalidos   |
-		| 2  | Parámetros Correctos y descuento por antelación|   (666, 21, 30) |  566.1    |   
-		| 3  | Parámetros Correctos y descuento por menor de edad|   (1000, 12, 4) |  950|   
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   (10000, 13,69) |  9200 |    
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad|  (5000, 24, 10) |4000 |  
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|  (2000, 25, 77) | 1540   |
+		| 1  | No hay clientes |   antes de insertar |  0 |
+		| 2  | Hay mas de un cliente|   despues de insertar | >0 | 
+		
 
-		4) Limites de equivalencia
-
-		| Número  | Clase de equivalencia |   Limites |
-		| --- | --- |---|
-		| 1  | Parámetros Inválidos |   ...(0,0,0) | 
-		| 2  | Parámetros Correctos y descuento por antelación|   (1,21,18)  (1,21,65) |  
-		| 3  | Parámetros Correctos y descuento por menor de edad|  (1,0,0)  (1,20,17) |  
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   (1,0,66)... |   
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad| (1,21,0)  (1,21,17)  |  
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|  (1,21,66)...  |
+		4) Limites de equivalencia: No hay limites
 
 		5) Casos de prueba especificos
 
 		| Número  | Clase de equivalencia |   Limites |
 		| --- | --- |---|
-		| 1  | Parámetros Inválidos |   (0,0,0) (-1546666666666666666666666666666666666,2,-1)| 
-		| 2  | Parámetros Correctos y descuento por antelación|   (1,21,18)  (1,21,65)  (666, 21, 30)|  
-		| 3  | Parámetros Correctos y descuento por menor de edad|  (1,0,0)  (1,20,17)  (1000, 12, 4) |  
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   (1,0,66) (10000, 13,69) |   
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad| (1,21,0)  (1,21,17)  (5000, 24, 10) |  
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|  (1,21,66) (2000, 25, 77) |
-
+		| --- | --- |---|---|
+		| 1  | No hay clientes |   antes de insertar |
+		| 2  | Hay mas de un cliente|   despues de insertar |
 	e) public abstract Item consultarItem(int id) throws ExcepcionServiciosAlquiler;
 		- 1) Excepciones
 		~~~
