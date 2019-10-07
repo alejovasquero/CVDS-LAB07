@@ -37,14 +37,45 @@ public class ServiciosAlquilerTest {
     @Transactional
     @Before
     public void setUp() throws ExcepcionServiciosAlquiler {
-        serviciosAlquiler.registrarCliente(new Cliente("el macho", 2020202, "22222", "cll 666","Elmacho@callme.com"));
-        serviciosAlquiler.registrarCliente(new Cliente("Rapel con aida merlano", 401, "222dd22", "cll 6d66","Elmacho@callmde.com")); 
-        serviciosAlquiler.registrarItem(new Item(null, 1, "Scary movie","Comedia barata", new Date(s), tarifaxDia, formatoRenta, genero));        
+        poblar();        
     }
 
 
    
-    //public abstract int valorMultaRetrasoxDia(int itemId) throws ExcepcionServiciosAlquiler;
+    private void poblar() throws ExcepcionServiciosAlquiler {
+        poblarClientes();
+        poblarItems();
+    }
+
+    private void poblarItems() {
+        serviciosAlquiler.registrarItem(new Item(null, 1, "Scary movie","Comedia barata", new Date(s), tarifaxDia, formatoRenta, genero));        
+    }
+
+    private void poblarClientes() throws ExcepcionServiciosAlquiler {
+        serviciosAlquiler.registrarCliente(new Cliente("el macho", 2020202, "22222", "cll 666","Elmacho@callme.com"));
+        serviciosAlquiler.registrarCliente(new Cliente("Rapel con aida merlano", 401, "222dd22", "cll 6d66","Elmacho@callmde.com")); 
+    }
+
+
+    private static Date parseDate(){
+        try{
+            return new 
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    // public abstract int valorMultaRetrasoxDia(int itemId) throws
+    // ExcepcionServiciosAlquiler;
     @Test
     public void hacerEstarPruebas(){
         assertTrue(false);

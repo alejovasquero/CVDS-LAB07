@@ -41,11 +41,16 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
     @Override
     public List<ItemRentado> consultarItemsCliente(long idcliente) throws ExcepcionServiciosAlquiler {
+        List<ItemRentado> ans = null;
         try {
-            return clienteDAO.loadItems(idcliente);
+            if(consultarCliente(idcliente)==null){
+                throw new ExcepcionServiciosAlquiler("El cliente no está registrado: "+ idcliente);
+            }
+            ans = clienteDAO.loadItems(idcliente);
         } catch (PersistenceException ex) {
             throw new ExcepcionServiciosAlquiler("Error al consultar el cliente " + idcliente, ex);
         }
+        return ans;
     }
 
     @Override
@@ -63,11 +68,12 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
         try {
             ans=itemDAO.load(id);
             if(ans==null){
-                throw ExcepcionServiciosAlquiler("El item no existe: " + id, ex);
+                throw new ExcepcionServiciosAlquiler("El item no existe: " + id);
             }
             } catch (PersistenceException ex) {
             throw new ExcepcionServiciosAlquiler("Error al consultar el item " + id, ex);
         }
+        return ans;
     }
 
     @Override
