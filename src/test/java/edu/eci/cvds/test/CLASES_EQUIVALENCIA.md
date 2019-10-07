@@ -611,64 +611,8 @@
 		| 5  | Parámetros Correctos, descuento por antelación y menor de edad| (1,21,0)  (1,21,17)  (5000, 24, 10) |  
 		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|  (1,21,66) (2000, 25, 77) |
 
-	m) public abstract long consultarCostoAlquiler(int iditem, int numdias) throws ExcepcionServiciosAlquiler;
-		- 1) Excepciones
-		~~~
-		/**
-	    * @obj consultar el costo del alquiler de un item
-	    * @pre numdias >=1
-	    * @param iditem el codigo del item
-	    * @param numdias el numero de dias que se va a alquilar
-	    * @return el costo total del alquiler, teniendo en cuesta el costo diario y
-	    * el numeo de dias del alquiler
-	    * @throws ExcepcionServiciosAlquiler si el identificador del item no existe
-	    */
-	    public abstract long consultarCostoAlquiler(int iditem, int numdias) throws ExcepcionServiciosAlquiler;
-		~~~
-		2) Clases de equivalencia
-
-		| Número  | Clase de equivalencia (en lenguaje natural o matemático) |   Resultado correcto /incorrecto. |   
-		| --- | --- |---|
-		| 1  | Parámetros Inválidos |   Resultado incorrecto. |   
-		| 2  | Parámetros Correctos y descuento por antelación|   Resultado correcto |   
-		| 3  | Parámetros Correctos y descuento por menor de edad|   Resultado correcto |   
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   Resultado correcto |   
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad|   Resultado correcto |   
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|   Resultado correcto |   
-		3) Casos de pruebas
-
-		| Número  | Clase de equivalencia  |   Prueba |  Resultado| 
-		| --- | --- |---|---|
-		| 1  | Parámetros Inválidos |   (-1546666666666666666666666666666666666,2,-1) |   ExcepcionParametrosInvalidos   |
-		| 2  | Parámetros Correctos y descuento por antelación|   (666, 21, 30) |  566.1    |   
-		| 3  | Parámetros Correctos y descuento por menor de edad|   (1000, 12, 4) |  950|   
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   (10000, 13,69) |  9200 |    
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad|  (5000, 24, 10) |4000 |  
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|  (2000, 25, 77) | 1540   |
-
-		4) Limites de equivalencia
-
-		| Número  | Clase de equivalencia |   Limites |
-		| --- | --- |---|
-		| 1  | Parámetros Inválidos |   ...(0,0,0) | 
-		| 2  | Parámetros Correctos y descuento por antelación|   (1,21,18)  (1,21,65) |  
-		| 3  | Parámetros Correctos y descuento por menor de edad|  (1,0,0)  (1,20,17) |  
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   (1,0,66)... |   
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad| (1,21,0)  (1,21,17)  |  
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|  (1,21,66)...  |
-
-		5) Casos de prueba especificos
-
-		| Número  | Clase de equivalencia |   Limites |
-		| --- | --- |---|
-		| 1  | Parámetros Inválidos |   (0,0,0) (-1546666666666666666666666666666666666,2,-1)| 
-		| 2  | Parámetros Correctos y descuento por antelación|   (1,21,18)  (1,21,65)  (666, 21, 30)|  
-		| 3  | Parámetros Correctos y descuento por menor de edad|  (1,0,0)  (1,20,17)  (1000, 12, 4) |  
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   (1,0,66) (10000, 13,69) |   
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad| (1,21,0)  (1,21,17)  (5000, 24, 10) |  
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|  (1,21,66) (2000, 25, 77) |
-
-	n) public abstract void actualizarTarifaItem(int id, long tarifa) throws ExcepcionServiciosAlquiler;
+	
+	m) public abstract void actualizarTarifaItem(int id, long tarifa) throws ExcepcionServiciosAlquiler;
 		- 1) Excepciones
 		~~~
 		/**
@@ -723,7 +667,7 @@
 		| 5  | Parámetros Correctos, descuento por antelación y menor de edad| (1,21,0)  (1,21,17)  (5000, 24, 10) |  
 		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|  (1,21,66) (2000, 25, 77) |
 
-	ñ) public abstract void registrarItem(Item i) throws ExcepcionServiciosAlquiler;
+	n) public abstract void registrarItem(Item i) throws ExcepcionServiciosAlquiler;
 		- 1) Excepciones
 		~~~
 		/**
@@ -776,7 +720,7 @@
 		| 5  | Parámetros Correctos, descuento por antelación y menor de edad| (1,21,0)  (1,21,17)  (5000, 24, 10) |  
 		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|  (1,21,66) (2000, 25, 77) |
 		
-	o) public abstract void vetarCliente(long docu, boolean estado) throws ExcepcionServiciosAlquiler;
+	ñ) public abstract void vetarCliente(long docu, boolean estado) throws ExcepcionServiciosAlquiler;
 		- 1) Excepciones
 		~~~
 		
