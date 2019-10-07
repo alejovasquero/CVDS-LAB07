@@ -111,7 +111,7 @@ public class ServiciosAlquilerTest {
     @Test
     public void deberiaTenerAlMenosUnItem(){
         //PREGUNTAR COMO SE INSERTA DE POOB A BASES
-        assertTrue(falase);
+        assertTrue(false);
     }
     //public abstract List<Cliente> consultarClientes() throws ExcepcionServiciosAlquiler;
     @Test
