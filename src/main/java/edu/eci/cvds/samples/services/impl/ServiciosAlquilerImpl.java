@@ -59,9 +59,13 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
     @Override
     public Item consultarItem(int id) throws ExcepcionServiciosAlquiler {
+        Item ans=null;
         try {
-            return itemDAO.load(id);
-        } catch (PersistenceException ex) {
+            ans=itemDAO.load(id);
+            if(ans==null){
+                throw ExcepcionServiciosAlquiler("El item no existe: " + id, ex);
+            }
+            } catch (PersistenceException ex) {
             throw new ExcepcionServiciosAlquiler("Error al consultar el item " + id, ex);
         }
     }

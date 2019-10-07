@@ -185,12 +185,8 @@
 
 		| Número  | Clase de equivalencia (en lenguaje natural o matemático) |   Resultado correcto /incorrecto. |   
 		| --- | --- |---|
-		| 1  | Parámetros Inválidos |   Resultado incorrecto. |   
-		| 2  | Parámetros Correctos y descuento por antelación|   Resultado correcto |   
-		| 3  | Parámetros Correctos y descuento por menor de edad|   Resultado correcto |   
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   Resultado correcto |   
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad|   Resultado correcto |   
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|   Resultado correcto |   
+		| 1  | El item no existe |   ExcepcionServiciosAlquiler |   
+		| 2  | El item existe|   El item esperado |     
 		3) Casos de pruebas
 
 		| Número  | Clase de equivalencia  |   Prueba |  Resultado| 

@@ -4,11 +4,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.google.inject.Inject;
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.Cliente;
+import edu.eci.cvds.samples.entities.Item;
 import edu.eci.cvds.samples.entities.ItemRentado;
 import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquiler;
@@ -37,7 +39,7 @@ public class ServiciosAlquilerTest {
     public void setUp() throws ExcepcionServiciosAlquiler {
         serviciosAlquiler.registrarCliente(new Cliente("el macho", 2020202, "22222", "cll 666","Elmacho@callme.com"));
         serviciosAlquiler.registrarCliente(new Cliente("Rapel con aida merlano", 401, "222dd22", "cll 6d66","Elmacho@callmde.com")); 
-        
+        serviciosAlquiler.registrarItem(new Item(null, 1, "Scary movie","Comedia barata", new Date(s), tarifaxDia, formatoRenta, genero));        
     }
 
 
