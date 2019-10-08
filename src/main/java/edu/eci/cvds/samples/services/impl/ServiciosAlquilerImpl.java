@@ -13,6 +13,7 @@ import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquiler;
 import java.sql.Date;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 @Singleton
@@ -196,5 +197,9 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
         } catch (Exception e) {
             //TODO: handle exception
         }
+    }
+    @Override
+    public List<ItemRentado> consultarItemsRentadosSinDevolver(){
+        return new ArrayList<ItemRentado>();
     }
 }

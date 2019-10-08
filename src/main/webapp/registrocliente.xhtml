@@ -50,7 +50,7 @@
 	 </style>
 	 <h:body>
 
-	 <h:form id="cliente_form">
+	 <h:form id="clientsForm">
 		 <p:dataTable  var="dato" value="#{alquilerBean.consultarClientes()}" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 					  rows="5" selectionMode="single" id="documento" selection="#{alquilerBean.selectedCliente}" rowKey="#{dato.getDocumento()}">
 			 <f:facet name="header">
@@ -75,6 +75,7 @@
 				 <h:commandButton id="Visualizar" value="Ingresar"  actionListener="registroalquiler?faces-redirect = true"/>
 			 </f:facet>
 		 </p:dataTable>
+
 		<p:panel id="panel" header="Registrar Nuevo Usuario" styleclass="myPanel" bgcolor="yellow" class="register">
 
 			<h:panelGrid id="grid" cellpadding="5" columns="2">
@@ -93,7 +94,7 @@
 				<p:outputLabel for="Email" value="Email :"/>
 				<p:inputText id="Email" type="String"  binding="#{ema}"/>
 			</h:panelGrid>
-			<p:commandButton id="submit" value="Registrar" update="cliente_form"  actionListener="#{alquilerBean.agregarCliente(nom.value,docu.value,tel.value,dir.value,ema.value)}" style="margin-left:150px"/>
+			<p:commandButton id="submit" value="Registrar" update="clientsForm"  actionListener="#{alquilerBean.agregarCliente(nom.value,docu.value,tel.value,dir.value,ema.value)}" style="margin-left:150px"/>
 
 		</p:panel>
 

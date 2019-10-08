@@ -2,6 +2,7 @@ package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
 import edu.eci.cvds.samples.entities.Cliente;
+import edu.eci.cvds.samples.entities.ItemRentado;
 import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquiler;
 
@@ -38,5 +39,16 @@ public class AlquilerItemsBean extends BasePageBean{
 
     public void setSelectedCliente(Cliente selectedCliente){
         this.selectedCliente = selectedCliente;
+    }
+
+
+    public List<ItemRentado> consultarItemsRentadosSinDevolver(){
+        List<ItemRentado> ans = null;
+        if(selectedCliente!=null){
+            ans = serviciosAlquiler.consultarItemsRentadosSinDevolver();
+        }
+        return ans;
+        
+
     }
 }

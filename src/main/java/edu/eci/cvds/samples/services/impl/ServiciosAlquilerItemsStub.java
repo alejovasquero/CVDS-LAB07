@@ -244,4 +244,9 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
     public void registrarTipoItem(TipoItem a) {
 
     }
+
+    @Override
+    public List<ItemRentado> consultarItemsRentadosSinDevolver(){
+        return new ArrayList<ItemRentado>();
+    }
 }
