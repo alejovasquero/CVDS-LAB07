@@ -4,3 +4,4 @@ bin/
 .classpath
 .vscode/
 .settings/
+.idea/

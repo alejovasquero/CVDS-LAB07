@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:p="http://primefaces.org/ui"
+ <h:head>
+	
+ </h:head>
+ <style>
+ body {
+	background-image: url("https://www.barraques.cat/pngfile/big/0-8717_1920x1080px-50-amazing-background-wallpaper-wallpapers.jpg");
+	background-position: center;
+    background-repeat: repeat;
+	width: 90vw;
+    height: 90vh;
+ }
+ form { 
+    margin: 0 auto; 
+    width:500px;
+	top:100px;
+ }
+ 
+ .ui-panelgrid td {
+    background-color: transparent !important;
+ }
+ 
+ form {
+	background-color: transparent;
+ }
+ 
+ 
+ 
+ .myPanel.ui-panel {
+	background-color: yellow;
+	border: black solid 1px !important;
+	
+ }
+ 
+ .headline_class {
+  font-weight: bold;
+  font-size: 25px;
+  }
+ 
+ </style>
+ <h:body>
+
+ <h:form id="guess_form">
+	<p:panel id="panel" header="Adivina el número" styleclass="myPanel" bgcolor="yellow">
+        <p:messages id="messages" />
+        <h:panelGrid columns="3" cellpadding="10" bgcolor="yellow">
+            <p:outputLabel id="Numero" value="#{guessBean.numeroA}"  style="display:none" class="headline_class"/>
+			<h3></h3> 
+			<h3></h3>
+            <h:panelGroup />
+			
+			<p:outputLabel for="Intento" id="Ingreso" value="Ingrese su número" class="headline_class"/>
+			<h:inputText id="Intento" type="number" title="Intento"  binding="#{entrada}"/>
+			
+			
+            
+			<h:panelGroup />
+			
+			<p:outputLabel  value="#Intentos totales:"  />
+			<p:outputLabel  id="Intentos" value="#{guessBean.intentos}"  />
+			
+			
+			<h:panelGroup />
+			
+			<p:outputLabel  value="Estado del juego:"  />
+			<p:outputLabel  id="Estado" value="#{guessBean.estado}"  />
+			
+			
+			<h:panelGroup />
+			
+			<p:outputLabel  value="PREMIO:"  />
+			<p:outputLabel  id="Premio" value="#{guessBean.puntos}"  />
+			
+			<h:panelGroup />
+			<h3></h3>
+			
+			<h:panelGroup />
+        </h:panelGrid>
+    </p:panel>
+    <p:commandButton id="submit" value="Intentar" update="panel"  actionListener="#{guessBean.guess(entrada.value)}" style="margin-left:150px"/>
+		
+	
+    <p:commandButton value="Reiniciar" update="panel"  actionListener="#{guessBean.restart}" style="margin-right:50px"/>
+ </h:form>
+</h:body>
+</html>
