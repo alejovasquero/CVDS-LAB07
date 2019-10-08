@@ -568,44 +568,24 @@
 
 		| Número  | Clase de equivalencia (en lenguaje natural o matemático) |   Resultado correcto /incorrecto. |   
 		| --- | --- |---|
-		| 1  | Parámetros Inválidos |   Resultado incorrecto. |   
-		| 2  | Parámetros Correctos y descuento por antelación|   Resultado correcto |   
-		| 3  | Parámetros Correctos y descuento por menor de edad|   Resultado correcto |   
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   Resultado correcto |   
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad|   Resultado correcto |   
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|   Resultado correcto |   
+		| 1  | El item no existe |   ExcepcionServiciosAlquiler |   
+		| 2  | El item existe|   El resultado esperado |   
+		
 		3) Casos de pruebas
 
 		| Número  | Clase de equivalencia  |   Prueba |  Resultado| 
 		| --- | --- |---|---|
-		| 1  | Parámetros Inválidos |   (-1546666666666666666666666666666666666,2,-1) |   ExcepcionParametrosInvalidos   |
-		| 2  | Parámetros Correctos y descuento por antelación|   (666, 21, 30) |  566.1    |   
-		| 3  | Parámetros Correctos y descuento por menor de edad|   (1000, 12, 4) |  950|   
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   (10000, 13,69) |  9200 |    
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad|  (5000, 24, 10) |4000 |  
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|  (2000, 25, 77) | 1540   |
+		| 1  | El item no existe | 700,800|  ExcepcionServiciosAlquiler |   
+		| 2  | El item existe|  (3, precio 101, dias 3), (4, precio 66, dias 44) | 303 y 2904 | 
 
-		4) Limites de equivalencia
-
-		| Número  | Clase de equivalencia |   Limites |
-		| --- | --- |---|
-		| 1  | Parámetros Inválidos |   ...(0,0,0) | 
-		| 2  | Parámetros Correctos y descuento por antelación|   (1,21,18)  (1,21,65) |  
-		| 3  | Parámetros Correctos y descuento por menor de edad|  (1,0,0)  (1,20,17) |  
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   (1,0,66)... |   
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad| (1,21,0)  (1,21,17)  |  
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|  (1,21,66)...  |
+		4) Limites de equivalencia: No hay limites
 
 		5) Casos de prueba especificos
 
 		| Número  | Clase de equivalencia |   Limites |
 		| --- | --- |---|
-		| 1  | Parámetros Inválidos |   (0,0,0) (-1546666666666666666666666666666666666,2,-1)| 
-		| 2  | Parámetros Correctos y descuento por antelación|   (1,21,18)  (1,21,65)  (666, 21, 30)|  
-		| 3  | Parámetros Correctos y descuento por menor de edad|  (1,0,0)  (1,20,17)  (1000, 12, 4) |  
-		| 4  | Parámetros Correctos y descuento por mayoría de edad|   (1,0,66) (10000, 13,69) |   
-		| 5  | Parámetros Correctos, descuento por antelación y menor de edad| (1,21,0)  (1,21,17)  (5000, 24, 10) |  
-		| 6  | Parámetros Correctos, descuento por antelación y mayoría de edad|  (1,21,66) (2000, 25, 77) |
+		| 1  | El item no existe | 700,800|  
+		| 2  | El item existe|  3,4 |
 
 	
 	m) public abstract void actualizarTarifaItem(int id, long tarifa) throws ExcepcionServiciosAlquiler;

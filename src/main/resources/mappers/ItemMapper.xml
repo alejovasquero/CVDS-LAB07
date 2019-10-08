@@ -4,7 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper">
-  
+	<resultMap type='Item' id='ItemResult'>
+		<id property='id' column='id'/>
+		<result property='nombre' column='nombre'/>
+		<result property='descripcion' column='descripcion'/>
+		<result property='fechaLanzamiento' column='fechalanzamiento'/>
+		<result property='tarifaxDia' column='tarifaxdia'/>
+		<result property='formatoRenta' column='formatorenta'/>
+		<result property='genero' column='genero'/>
+		<association property="tipo" javaType="TipoItem" columnPrefix='tipoitem_' resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoItemMapper.TipoItemResult"></association>  
+	</resultMap>
+
+
 	<insert parameterType='map' id='insertarItem'>
 		
 		INSERT INTO VI_ITEMS(id, nombre, descripcion, fechalanzamiento, tarifaxdia, formatorenta, genero, TIPOITEM_id) 
@@ -43,12 +54,12 @@
 		ir.fechainiciorenta as itemrentado_fechainiciorenta,
 		ir.fechafinrenta as itemrentado_fechafinrenta,
 		i.id as item_id,
-		i.nombre as item_nombre,
-		i.descripcion as item_descripcion,
-		i.fechalanzamiento as item_fechalanzamiento,
-		i.tarifaxdia as item_tarifaxdia,
-		i.formatorenta as item_formatorenta,
-		i.genero as item_genero,        
+		i.nombre as nombre,
+		i.descripcion as descripcion,
+		i.fechalanzamiento as fechalanzamiento,
+		i.tarifaxdia as tarifaxdia,
+		i.formatorenta as formatorenta,
+		i.genero as genero,        
 		ti.id as tipoitem_id,
 		ti.descripcion as tipoitem_descripcion
 		FROM
@@ -78,16 +89,7 @@
 		update VI_ITEMS set tarifaxdia=#{tarifa} where id=#{id};
 	</update>
 	
-	<resultMap type='Item' id='ItemResult'>
-		<id property='id' column='id'/>
-		<result property='nombre' column='nombre'/>
-		<result property='descripcion' column='descripcion'/>
-		<result property='fechaLanzamiento' column='fechalanzamiento'/>
-		<result property='tarifaxDia' column='tarifaxdia'/>
-		<result property='formatoRenta' column='formatorenta'/>
-		<result property='genero' column='genero'/>
-		<association property="tipo" javaType="TipoItem" columnPrefix='tipoitem_' resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoItemMapper.TipoItemResult"></association>  
-	</resultMap>
+	
 	
 	
 </mapper>

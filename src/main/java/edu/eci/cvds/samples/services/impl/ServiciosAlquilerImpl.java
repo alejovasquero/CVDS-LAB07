@@ -2,6 +2,9 @@ package edu.eci.cvds.samples.services.impl;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+
+import org.mybatis.guice.transactional.Transactional;
+
 import edu.eci.cvds.sampleprj.dao.*;
 
 import edu.eci.cvds.samples.entities.*;
@@ -140,11 +143,16 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
     @Override
     public long consultarCostoAlquiler(int iditem, int numdias) throws ExcepcionServiciosAlquiler {
+        long ans=0;
         try {
-            return itemDAO.consultarCostoAlquiler(iditem, numdias);
+            if(itemDAO.load(iditem)==null){
+                throw new ExcepcionServiciosAlquiler("El item no está registrado: " + iditem);
+            }
+            ans = itemDAO.consultarCostoAlquiler(iditem, numdias);
         } catch (PersistenceException ex) {
             throw new ExcepcionServiciosAlquiler("Error al consultar el item " + iditem, ex);
         }
+        return ans;
     }
 
     @Override
@@ -156,13 +164,15 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
         }
     }
 
+    @Transactional
     @Override
     public void registrarItem(Item i) throws ExcepcionServiciosAlquiler {
         try {
-            itemDAO.save(i);
             if(tipoItemDAO.load(i.getTipo().getID())==null){
                 tipoItemDAO.save(i.getTipo());
             }
+            itemDAO.save(i);
+            
         } catch (PersistenceException ex) {
             throw new ExcepcionServiciosAlquiler("Error al registrar el item " + i.toString(), ex);
         }
