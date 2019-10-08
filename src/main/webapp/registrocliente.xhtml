@@ -16,7 +16,7 @@
 	 }
 	 form {
 		margin: 0 auto;
-		width:500px;
+		width:1000px;
 		top:100px;
 	 }
 
@@ -33,20 +33,26 @@
 	 .myPanel.ui-panel {
 		background-color: yellow;
 		border: black solid 1px !important;
-
 	 }
 
 	 .headline_class {
 	  font-weight: bold;
 	  font-size: 25px;
 	  }
+
+	  .register {
+  		margin: auto;
+  		width: 50%;
+  		border: 3px solid green;
+  		padding: 10px;
+		}
  
 	 </style>
 	 <h:body>
 
 	 <h:form id="cliente_form">
-		 <p:dataTable value="#{AlquilerItemsBean.consultarClientes()}" var="dato" paginator="true" paginatorTemplate="{FirstPageLink}{PreviousPageLink}{CurrentPageReport}{NextPageLink}{LastPageLink}"
-					  rows="5" selectionMode="Single" id="documento" selection="#{AlquilerItemsBean.selectedCliente}" rowkey="#{dato.getDocumento()}">
+		 <p:dataTable  var="dato" value="#{alquilerBean.consultarClientes()}" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+					  rows="5" selectionMode="single" id="documento" selection="#{alquilerBean.selectedCliente}" rowKey="#{dato.getDocumento()}">
 			 <f:facet name="header">
 				 Clientes
 			 </f:facet>
@@ -66,10 +72,10 @@
 				 <h:outputText value="#{dato.getEmail()}"></h:outputText>
 			 </p:column>
 			 <f:facet name="footer">
-				 <h:commandButton id="Visualizar" value="Ver"  actionListener="registroalquiler?faces-redirect = true" style="margin-left:150px"/>
+				 <h:commandButton id="Visualizar" value="Ingresar"  actionListener="registroalquiler?faces-redirect = true"/>
 			 </f:facet>
 		 </p:dataTable>
-		<p:panel id="panel" header="Usuarios" styleclass="myPanel" bgcolor="yellow">
+		<p:panel id="panel" header="Registrar Nuevo Usuario" styleclass="myPanel" bgcolor="yellow" class="register">
 
 			<h:panelGrid id="grid" cellpadding="5" columns="2">
 				<p:outputLabel for="Documento" value="Documento :"/>
@@ -87,9 +93,9 @@
 				<p:outputLabel for="Email" value="Email :"/>
 				<p:inputText id="Email" type="String"  binding="#{ema}"/>
 			</h:panelGrid>
+			<p:commandButton id="submit" value="Registrar" update="cliente_form"  actionListener="#{alquilerBean.agregarCliente(nom.value,docu.value,tel.value,dir.value,ema.value)}" style="margin-left:150px"/>
 
 		</p:panel>
-		 <p:commandButton id="submit" value="Registrar Nuevo Cliente" update="cliente_form"  actionListener="#{AlquilerItemsBean.agregarCliente(nom.value,docu.value,tel.value,dir.value,ema.value)}" style="margin-left:150px"/>
 
 
 	 </h:form>
