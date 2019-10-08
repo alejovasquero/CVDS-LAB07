@@ -33,7 +33,7 @@ public interface ClienteMapper {
      */
     public List<Cliente> consultarClientes();
 	
-	public List<ItemRentado> consultarItems(long idcliente);
+	public List<ItemRentado> consultarItems(@Param("it" )long idcliente);
 	
     public void insertarCliente(@Param("cli")Cliente cli);
     

@@ -18,12 +18,17 @@
 </insert>
 
 <select id="getTipoItem" parameterType="map" resultMap="TipoItemResult">
-	select * from VI_TIPOITEM
+	select        
+		id,
+		descripcion
+	FROM VI_TIPOITEM
 	<where>
 		<if test="it != null">
-			id=#{id}
+			id=#{it}
 		</if>
 	</where>
 
 </select>   
+
+
 </mapper>

@@ -13,7 +13,7 @@
 	</resultMap>
 	
 	<insert parameterType='map' id='insertItemRentado'>
-		INSERT INTO VI_ITEM_RENTADO(CLIENTES_documento,ITEMS_id,fechainiciorenta,fechafinrenta) 
+		INSERT INTO VI_ITEMRENTADO(CLIENTES_documento,ITEMS_id,fechainiciorenta,fechafinrenta) 
 		values(#{docu},#{itemId},#{fechaIni},#{fechaFin}); 
 	</insert>
 

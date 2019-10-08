@@ -17,8 +17,11 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
     @Inject
     private ClienteDAO clienteDAO;
+    @Inject
     private ItemRentadoDAO itemRentadoDAO;
+    @Inject
     private ItemDAO itemDAO;
+    @Inject
     private TipoItemDAO tipoItemDAO;
 
     @Override
@@ -116,7 +119,7 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
             calendar.add(Calendar.DAY_OF_YEAR, numdias);
-            // itemRentadoDAO.save(docu,item.getId(),date,calendar.getTime());
+            itemRentadoDAO.save(docu,item.getId(), date, new java.sql.Date(calendar.getTime().getTime()));
         } catch (Exception ex) {
             throw new ExcepcionServiciosAlquiler(
                     "Error al registrar el alquiler del producto " + item.toString() + " por el cliente " + docu, ex);
@@ -127,6 +130,9 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
     public void registrarCliente(Cliente c) throws ExcepcionServiciosAlquiler {
         try {
             clienteDAO.save(c);
+            for(ItemRentado a: c.getRentados()){
+                itemDAO.save(a.getItem());
+            }
         } catch (PersistenceException ex) {
             throw new ExcepcionServiciosAlquiler("Error al registrar el cliente " + c.toString(), ex);
         }
@@ -154,6 +160,9 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
     public void registrarItem(Item i) throws ExcepcionServiciosAlquiler {
         try {
             itemDAO.save(i);
+            if(tipoItemDAO.load(i.getTipo().getID())==null){
+                tipoItemDAO.save(i.getTipo());
+            }
         } catch (PersistenceException ex) {
             throw new ExcepcionServiciosAlquiler("Error al registrar el item " + i.toString(), ex);
         }
@@ -169,4 +178,13 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
         }
        
    }
+
+    @Override
+    public void registrarTipoItem(TipoItem a) {
+        try {
+            tipoItemDAO.save(a);
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+    }
 }
