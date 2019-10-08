@@ -44,28 +44,41 @@
              padding: 10px;
            
         }
+
+        
         .ui-datatable-tablewrapper  table thead tr th{
             border: 1px #ebebeb solid;
             background: #d6d6d6;
             height: 35px;
             text-shadow: black;
-            color: white
+            
+        }
+
+        .ui-datatable .ui-widget{
+            border: 1px #ebebeb solid;
+            background: #d6d6d6;
+            height: 35px;
+            text-shadow: black;
+            color: rgb(248, 7, 7)
         }
 
         .ui-paginator{
             border: 1px #5ee90e solid;
-            background: #6b16da;
+            background: #adadadb4;
             height: 35px;
             text-shadow: black;
             color: white
         }
-
+        .ui-datatable-tablewrapper{
+            background: #0ee97162;
+        }
         .ui-paginator-first{
             background:#c5c5c5 ;
             width: 100px;
             height: 10px;
-            text-shadow: 2px 2px rgba(0, 183, 255, 0.37);
-            border-radius: 5px;
+            
+            
+            background-color: rgba(243, 0, 0, 0);
             font-size:30px;
         }
 
@@ -74,7 +87,8 @@
             width: 100px;
             height: 10px;
             text-shadow: 2px 2px rrgba(0, 183, 255, 0.37);
-            border-radius: 5px;
+            
+            background-color: rgba(211, 211, 211, 0);
             font-size:30px;
         }
 
@@ -83,8 +97,9 @@
             width: 100px;
             height: 10px;
             text-shadow: 2px 2px rgba(0, 183, 255, 0.37);
-            border-radius: 5px;
-            font-size:30px;
+            
+            background-color: rgba(97, 11, 11, 0);
+            font-size:20px;
         }
 
         .ui-paginator-last{
@@ -92,7 +107,8 @@
             width: 100px;
             height: 10px;
             text-shadow: 2px 2px rgba(0, 183, 255, 0.37);
-            border-radius: 5px;
+            colo
+            background-color: rgba(211, 211, 211, 0);
             font-size:30px;
         }
         .ui-paginator-current{
@@ -111,10 +127,10 @@
         .ui-datatable-footer input {
             width: 100px;
             height: 100px;
-            background-color: rgba(221, 21, 21, 0.596);
+            background-color: rgba(221, 21, 98, 0.842);
             margin: auto;   
             width: 60%;
-            border: 3px solid rgba(118, 16, 214, 0.582);
+            border: 3px solid rgba(31, 63, 204, 0.582);
             padding: 10px;
         }
 
@@ -124,7 +140,7 @@
             margin: auto;
             width: 60%;
             text-align: center;
-            font-size: 60px;
+            font-size: 45px;
             text-shadow: rgb(50, 48, 179);
             color: rgb(3, 240, 129)
         }
@@ -132,6 +148,10 @@
         .ui-datatable-footer{
             margin: auto;   
             text-align: center;
+        }
+
+        .ui-state-default {
+            column-span: 2;
         }
         </style>
 
@@ -143,22 +163,27 @@
             <f:facet name="header">
                 Clientes
             </f:facet>
-            <p:column headerText="Id">
-                <h:outputText value="#{dato.getDocumento()}"></h:outputText>
-            </p:column>
-            <p:column headerText="Nombre">
-                <h:outputText value="#{dato.getNombre()}"></h:outputText>
-            </p:column>
-            <p:column headerText="Telefono">
-                <h:outputText value="#{dato.getTelefono()}"></h:outputText>
-            </p:column>
-            <p:column headerText="Direccion">
-                <h:outputText value="#{dato.getDireccion()}"></h:outputText>
-            </p:column>
-            <p:column headerText="Email">
-                <h:outputText value="#{dato.getEmail()}"></h:outputText>
-            </p:column>
+            <p:columnGroup type="header">
+                <p:row>
+                    <p:column headerText="Id" colspan="2">
+                        <h:outputText value="#{dato.getDocumento()}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="Nombre" colspan="2">
+                        <h:outputText value="#{dato.getNombre()}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="Telefono" colspan="2">
+                        <h:outputText value="#{dato.getTelefono()}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="Direccion" colspan="2">
+                        <h:outputText value="#{dato.getDireccion()}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="Email" colspan="2">
+                        <h:outputText value="#{dato.getEmail()}"></h:outputText>
+                    </p:column>
+                </p:row>
+            </p:columnGroup>
             <f:facet name="footer">
+                
                 <h:commandButton id="Visualizar" value="Ingresar"  actionListener="registroalquiler?faces-redirect = true"/>
             </f:facet>
         </p:dataTable>
