@@ -16,6 +16,11 @@
            width:1000px;
            top:100px;
         }
+        th {
+            
+            width:40%;
+            
+        }
    
         .ui-panelgrid td {
            background-color: transparent !important;
@@ -24,6 +29,8 @@
         form {
            background-color: transparent;
         }
+
+        
    
    
    
@@ -46,7 +53,7 @@
         }
 
         
-        .ui-datatable-tablewrapper  table thead tr th{
+        .ui-datatable-tablewrapper  table thead th{
             border: 1px #ebebeb solid;
             background: #d6d6d6;
             height: 35px;
@@ -61,7 +68,7 @@
             text-shadow: black;
             color: rgb(248, 7, 7)
         }
-
+        
         .ui-paginator{
             border: 1px #5ee90e solid;
             background: #adadadb4;
@@ -107,7 +114,7 @@
             width: 100px;
             height: 10px;
             text-shadow: 2px 2px rgba(0, 183, 255, 0.37);
-            colo
+            
             background-color: rgba(211, 211, 211, 0);
             font-size:30px;
         }
@@ -155,33 +162,32 @@
         }
         </style>
 
+        
     <h:body>
 
     <h:form id="cliente_form">
-        <p:dataTable  var="dato" value="#{alquilerBean.consultarItemsRentadosSinDevolver()}" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                     rows="5" selectionMode="single" id="documento" selection="#{alquilerBean.selectedCliente}" rowKey="#{dato.getDocumento()}">
+        <p:dataTable  var="dato" value="#{alquilerBean.consultarClientes()}" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                     rows="5" selectionMode="single" id="documento" selection="#{alquilerBean.selectedCliente}" rowKey="#{dato.getDocumento()}" class="display">
             <f:facet name="header">
-                Clientes
+                Items del cliente
             </f:facet>
-            <p:columnGroup type="header">
-                <p:row>
-                    <p:column headerText="Id" colspan="2">
-                        <h:outputText value="#{dato.getDocumento()}"></h:outputText>
-                    </p:column>
-                    <p:column headerText="Nombre" colspan="2">
-                        <h:outputText value="#{dato.getNombre()}"></h:outputText>
-                    </p:column>
-                    <p:column headerText="Telefono" colspan="2">
-                        <h:outputText value="#{dato.getTelefono()}"></h:outputText>
-                    </p:column>
-                    <p:column headerText="Direccion" colspan="2">
-                        <h:outputText value="#{dato.getDireccion()}"></h:outputText>
-                    </p:column>
-                    <p:column headerText="Email" colspan="2">
-                        <h:outputText value="#{dato.getEmail()}"></h:outputText>
-                    </p:column>
-                </p:row>
-            </p:columnGroup>
+            
+            <p:column headerText="Id" style="width:13%">
+                <h:outputText value="#{dato.getDocumento()}"></h:outputText>
+            </p:column>
+            <p:column headerText="Nombre" >
+                <h:outputText value="#{dato.getNombre()}"></h:outputText>
+            </p:column>
+            <p:column headerText="Telefono"  style="width:15%">
+                <h:outputText value="#{dato.getTelefono()}"></h:outputText>
+            </p:column>
+            <p:column headerText="Direccion" >
+                <h:outputText value="#{dato.getDireccion()}"></h:outputText>
+            </p:column>
+            <p:column headerText="Email">
+                <h:outputText value="#{dato.getEmail()}"></h:outputText>
+            </p:column>
+                
             <f:facet name="footer">
                 
                 <h:commandButton id="Visualizar" value="Ingresar"  actionListener="registroalquiler?faces-redirect = true"/>

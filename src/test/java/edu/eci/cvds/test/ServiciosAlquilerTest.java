@@ -1,31 +1,25 @@
 package edu.eci.cvds.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
+import static org.junit.Assert.assertTrue;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
 import com.google.inject.Inject;
-import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.Cliente;
 import edu.eci.cvds.samples.entities.Item;
-import edu.eci.cvds.samples.entities.ItemRentado;
 import edu.eci.cvds.samples.entities.TipoItem;
 import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquilerFactory;
 import org.apache.ibatis.session.SqlSession;
-import org.junit.Before;
-import org.junit.FixMethodOrder;
+
+
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
+
 import org.mybatis.guice.transactional.Transactional;
 import org.junit.After;
-import org.junit.Assert;
+
 
 @Transactional
 public class ServiciosAlquilerTest {
@@ -140,6 +134,8 @@ public class ServiciosAlquilerTest {
         }   
     }
 
+    
+
 
 
 
@@ -186,7 +182,21 @@ public class ServiciosAlquilerTest {
         //assertTrue(false);
     }
 
+    @Test
+    public void emptyDB() {
 
+        for (long i = 0; i < 1000; i++) {
+            boolean r = false;
+            try {
+                Cliente cliente = serviciosAlquiler.consultarCliente(i);
+            } catch(ExcepcionServiciosAlquiler e) {
+                r = true;
+            } catch(IndexOutOfBoundsException e) {
+                r = true;
+            }
+            Assert.assertTrue("Excepton should have been thrown. Database not empty for client " + i, r);
+        }
+    }
 
 
     //public abstract Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler;
