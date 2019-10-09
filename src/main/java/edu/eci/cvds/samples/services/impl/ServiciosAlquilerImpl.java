@@ -98,7 +98,9 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
     @Override
     public long consultarMultaAlquiler(int iditem, Date fechaDevolucion) throws ExcepcionServiciosAlquiler {
         try {
+            System.out.println(iditem);
             ItemRentado a=itemRentadoDAO.load(iditem);
+            System.out.println(iditem);
             if(a==null || itemRentadoDAO.load(iditem)==null){
                 throw new ExcepcionServiciosAlquiler("No hay información de el item rentado: "+ iditem);
             }
@@ -107,7 +109,7 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
             long diasRetraso = ChronoUnit.DAYS.between(fechaMinimaEntrega, fechaEntrega);            
             return diasRetraso;
         } catch (PersistenceException e) {
-            throw new ExcepcionServiciosAlquiler("Error al consultar el item rentado: "+ iditem);
+            throw new ExcepcionServiciosAlquiler("Error al consultar el item rentado: "+ iditem, e);
         }
         
     }

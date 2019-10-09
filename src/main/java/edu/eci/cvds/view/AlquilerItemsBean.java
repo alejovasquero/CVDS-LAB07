@@ -72,7 +72,7 @@ public class AlquilerItemsBean extends BasePageBean{
         try {
             a=serviciosAlquiler.consultarMultaAlquiler(item, new java.sql.Date(Calendar.getInstance().getTime().getTime()));
         } catch (Exception e) {
-            throw e;
+            
         }
         return a;
     }
