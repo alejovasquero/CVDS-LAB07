@@ -146,4 +146,7 @@ public interface ServiciosAlquiler {
 
    public abstract void registrarTipoItem(TipoItem a);
 
+
+   public abstract List<ItemRentado> consultarItemsRentadosSinDevolver();
+
 }
