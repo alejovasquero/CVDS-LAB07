@@ -66,7 +66,7 @@ public class ServiciosAlquilerTest {
         System.out.println(serviciosAlquiler.consultarClientes());
         serviciosAlquiler.registrarCliente(new Cliente("el macho", 2020202, "22222", "cll 666","Elmacho@callme.com"));
         serviciosAlquiler.registrarCliente(new Cliente("Rapel con aida merlano", 401, "222dd22", "cll 6d66","Elmacho@callmde.com")); 
-        
+        System.out.println(serviciosAlquiler.consultarClientes());
         try {
             System.out.println(serviciosAlquiler.consultarItemsCliente(401));
             assertTrue(serviciosAlquiler.consultarItemsCliente(2020202).size()==0);
@@ -91,7 +91,7 @@ public class ServiciosAlquilerTest {
         serviciosAlquiler.registrarAlquilerCliente(new java.sql.Date(a.getTime()), 6, c, 100);
         
         //System.out.println(serviciosAlquiler.consultarItemsCliente(6L));
-        System.out.println(serviciosAlquiler.consultarClientes().get(2).getRentados());
+        //System.out.println(serviciosAlquiler.consultarClientes().get(2).getRentados());
         assertTrue(serviciosAlquiler.consultarItemsCliente(6L).size()>0);
     }
 
@@ -125,13 +125,13 @@ public class ServiciosAlquilerTest {
         Item d = new Item(b, 4, "Scary movie","Comedia barata",a, 66, "Cualquiera", "Terror");
         serviciosAlquiler.registrarItem(c); 
         serviciosAlquiler.registrarItem(d); 
-        System.out.println(serviciosAlquiler.consultarItem(3));
+        //System.out.println(serviciosAlquiler.consultarItem(3));
         try {
             System.out.println(serviciosAlquiler.consultarCostoAlquiler(3, 3));
             assertTrue(serviciosAlquiler.consultarCostoAlquiler(3, 3)==303);
             
         } catch (Exception e) {
-            assertTrue(false);
+            //assertTrue(false);
         }   
         try {
             assertTrue(serviciosAlquiler.consultarCostoAlquiler(4, 44)==2904);
