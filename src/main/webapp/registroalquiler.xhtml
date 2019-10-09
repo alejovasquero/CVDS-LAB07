@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3c.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-      <style>
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+ 	<h:head>
+	
+ 	</h:head>
+ 	<style type="text/css">
         body {
            background-image: url("https://www.barraques.cat/pngfile/big/0-8717_1920x1080px-50-amazing-background-wallpaper-wallpapers.jpg");
            background-position: center;
@@ -81,42 +84,28 @@
         }
         .ui-paginator-first{
             background:#c5c5c5 ;
-            width: 100px;
-            height: 10px;
-            
-            
             background-color: rgba(243, 0, 0, 0);
-            font-size:30px;
         }
 
         .ui-paginator-prev{
             background:#c5c5c5 ;
-            width: 100px;
-            height: 10px;
             text-shadow: 2px 2px rrgba(0, 183, 255, 0.37);
             
             background-color: rgba(211, 211, 211, 0);
-            font-size:30px;
         }
 
         .ui-paginator-next{
             background:#0f0202b9 ;
-            width: 100px;
-            height: 10px;
             text-shadow: 2px 2px rgba(0, 183, 255, 0.37);
-            
             background-color: rgba(97, 11, 11, 0);
-            font-size:20px;
         }
 
         .ui-paginator-last{
             background:#0f0202b9 ;
-            width: 100px;
-            height: 10px;
             text-shadow: 2px 2px rgba(0, 183, 255, 0.37);
             
             background-color: rgba(211, 211, 211, 0);
-            font-size:30px;
+
         }
         .ui-paginator-current{
             background:#c5c5c5 ;
@@ -124,7 +113,7 @@
             height: 10px;
             text-shadow: 2px 2px rgba(0, 183, 255, 0.37);
             border-radius: 5px;
-            font-size:30px;
+            font-size:5px;
         }
 
         .ui-paginator {
@@ -147,9 +136,10 @@
             margin: auto;
             width: 60%;
             text-align: center;
-            font-size: 45px;
+            /*font-size: 45px;*/
             text-shadow: rgb(50, 48, 179);
-            color: rgb(3, 240, 129)
+            background:  rgb(50, 48, 179);
+            color:white;
         }
 
         .ui-datatable-footer{
@@ -161,64 +151,57 @@
             column-span: 2;
         }
         </style>
+	 <h:body>
 
-        
-    <h:body>
+	 <h:form id="clientsForm">
+		 <p:dataTable  var="dato" value="#{alquilerBean.consultarClientes()}" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+					  rows="5" selectionMode="single" id="documento" selection="#{alquilerBean.selectedCliente}" rowKey="#{dato.getDocumento()}">
+			 <f:facet name="header">
+				 Clientes
+			 </f:facet>
+			 <p:column headerText="Id">
+				 <h:outputText value="#{dato.getDocumento()}"></h:outputText>
+			 </p:column>
+			 <p:column headerText="Nombre">
+				 <h:outputText value="#{dato.getNombre()}"></h:outputText>
+			 </p:column>
+			 <p:column headerText="Telefono">
+				 <h:outputText value="#{dato.getTelefono()}"></h:outputText>
+			 </p:column>
+			 <p:column headerText="Direccion">
+				 <h:outputText value="#{dato.getDireccion()}"></h:outputText>
+			 </p:column>
+			 <p:column headerText="Email">
+				 <h:outputText value="#{dato.getEmail()}"></h:outputText>
+			 </p:column>
+			 <f:facet name="footer">
+				 <h:commandButton id="Visualizar" value="Ingresar"  actionListener="registroalquiler?faces-redirect = true"/>
+			 </f:facet>
+		 </p:dataTable>
 
-    <h:form id="cliente_form">
-        <p:dataTable  var="dato" value="#{alquilerBean.consultarClientes()}" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                     rows="5" selectionMode="single" id="documento" selection="#{alquilerBean.selectedCliente}" rowKey="#{dato.getDocumento()}" class="display">
-            <f:facet name="header">
-                Items del cliente
-            </f:facet>
-            
-            <p:column headerText="Id" style="width:13%">
-                <h:outputText value="#{dato.getDocumento()}"></h:outputText>
-            </p:column>
-            <p:column headerText="Nombre" >
-                <h:outputText value="#{dato.getNombre()}"></h:outputText>
-            </p:column>
-            <p:column headerText="Telefono"  style="width:15%">
-                <h:outputText value="#{dato.getTelefono()}"></h:outputText>
-            </p:column>
-            <p:column headerText="Direccion" >
-                <h:outputText value="#{dato.getDireccion()}"></h:outputText>
-            </p:column>
-            <p:column headerText="Email">
-                <h:outputText value="#{dato.getEmail()}"></h:outputText>
-            </p:column>
-                
-            <f:facet name="footer">
-                
-                <h:commandButton id="Visualizar" value="Ingresar"  actionListener="registroalquiler?faces-redirect = true"/>
-            </f:facet>
-        </p:dataTable>
-       <p:panel id="panel" header="Registrar Nuevo Usuario" styleclass="myPanel" bgcolor="yellow" class="register">
+		<p:panel id="panel" header="Registrar Nuevo Usuario" styleclass="myPanel" bgcolor="yellow" class="register">
 
-           <h:panelGrid id="grid" cellpadding="5" columns="2">
-               <p:outputLabel for="Documento" value="Documento :"/>
-               <p:inputText id="Documento" type="long"  binding="#{docu}"/>
+			<h:panelGrid id="grid" cellpadding="5" columns="2">
+				<p:outputLabel for="Documento" value="Documento :"/>
+				<p:inputText id="Documento" type="long"  binding="#{docu}"/>
 
-               <p:outputLabel for="Telefono" value="Telefono :"/>
-               <p:inputText id="Telefono" type="String"  binding="#{tele}"/>
+				<p:outputLabel for="Telefono" value="Telefono :"/>
+				<p:inputText id="Telefono" type="String"  binding="#{tele}"/>
 
-               <p:outputLabel for="Nombre" value="Nombre :"/>
-               <p:inputText id="Nombre" type="String"  binding="#{nom}"/>
+				<p:outputLabel for="Nombre" value="Nombre :"/>
+				<p:inputText id="Nombre" type="String"  binding="#{nom}"/>
 
-               <p:outputLabel for="Direccion" value="Direccion :"/>
-               <p:inputText id="Direccion" type="String"  binding="#{dir}"/>
+				<p:outputLabel for="Direccion" value="Direccion :"/>
+				<p:inputText id="Direccion" type="String"  binding="#{dir}"/>
 
-               <p:outputLabel for="Email" value="Email :"/>
-               <p:inputText id="Email" type="String"  binding="#{ema}"/>
-           </h:panelGrid>
-           <p:commandButton id="submit" value="Registrar" update="cliente_form"  actionListener="#{alquilerBean.agregarCliente(nom.value,docu.value,tel.value,dir.value,ema.value)}" style="margin-left:150px"/>
+				<p:outputLabel for="Email" value="Email :"/>
+				<p:inputText id="Email" type="String"  binding="#{ema}"/>
+			</h:panelGrid>
+			<p:commandButton id="submit" value="Registrar" update="clientsForm"  actionListener="#{alquilerBean.agregarCliente(nom.value,docu.value,tel.value,dir.value,ema.value)}" style="margin-left:150px"/>
 
-       </p:panel>
+		</p:panel>
 
 
-    </h:form>
-    </h:body>
-
-
-
+	 </h:form>
+	</h:body>
 </html>
