@@ -2,6 +2,7 @@ package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
 import edu.eci.cvds.samples.entities.Cliente;
+import edu.eci.cvds.samples.entities.Item;
 import edu.eci.cvds.samples.entities.ItemRentado;
 import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquiler;
@@ -31,6 +32,18 @@ public class AlquilerItemsBean extends BasePageBean{
         return clientes;
     }
 
+
+
+    public void alquilarItem(int item ,int dias){
+        try {
+            Item a= serviciosAlquiler.consultarItem(item);
+            serviciosAlquiler.registrarAlquilerCliente(new java.sql.Date(Calendar.getInstance().getTime().getTime()), selectedCliente.getDocumento(), a, dias);
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+
+
+    }
     public void agregarCliente(String nombre, long documento, String telefono, String direccion, String email){
         try {
             serviciosAlquiler.registrarCliente(new Cliente(nombre,documento,telefono,direccion,email));
@@ -58,8 +71,7 @@ public class AlquilerItemsBean extends BasePageBean{
             try {
                 ans = serviciosAlquiler.consultarItemsRentadosSinDevolver(selectedCliente.getDocumento());
             } catch (ExcepcionServiciosAlquiler e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                
             }
         }
         return ans;
@@ -75,5 +87,16 @@ public class AlquilerItemsBean extends BasePageBean{
             
         }
         return a;
+    }
+
+
+    public long consultarCosotAlquiler(int item , int dias){
+        long ans=0;
+        try {
+            ans= serviciosAlquiler.consultarCostoAlquiler(item, dias);
+        } catch (Exception e) {
+            
+        }
+        return ans;
     }
 }

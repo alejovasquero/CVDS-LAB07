@@ -195,32 +195,27 @@
              </p:column>
              
 
-			 <f:facet name="footer">
-                <h:button id="Visualizar" value="Ingresar"  outcome="registrocliente"/>    
-             
-			 </f:facet>
+			 
 		 </p:dataTable>
          <div class="divider"/>
 		<p:panel id="panel" header="Alquilar nuevo item" styleclass="myPanel" bgcolor="yellow" class="register">
 
-			<h:panelGrid id="grid" cellpadding="5" columns="2">
-				<p:outputLabel for="Documento" value="Documento :"/>
-				<p:inputText id="Documento" type="long"  binding="#{docu}"/>
+			<h:panelGrid id="grid" cellpadding="3" columns="2">
+				<p:outputLabel for="Item" value="Id del Item :"/>
+				<p:inputText id="Item" type="int"  binding="#{item}"/>
 
-				<p:outputLabel for="Telefono" value="Telefono :"/>
-				<p:inputText id="Telefono" type="String"  binding="#{tele}"/>
+				<p:outputLabel for="Dias" value="Dias :"/>
+				<p:inputText id="Dias" type="int"  binding="#{dias}"/>
 
-				<p:outputLabel for="Nombre" value="Nombre :"/>
-				<p:inputText id="Nombre" type="String"  binding="#{nom}"/>
-
-				<p:outputLabel for="Direccion" value="Direccion :"/>
-				<p:inputText id="Direccion" type="String"  binding="#{dir}"/>
-
-				<p:outputLabel for="Email" value="Email :"/>
-				<p:inputText id="Email" type="String"  binding="#{ema}"/>
+                <p:outputLabel for="Nombre" value="Nombre :"/>
+                <h:outputText id="Nombre" for="Nombre" value="#{alquilerBean.consultarCostoAlquiler(item.value, dias.value)}"/>
+				<p:commandButton id="submit" value="Consultar costo" update="Nombre"/>
+                <p:commandButton id="Alquilar" value="Alquilar item" actionListener="#{alquilerBean.agregarCliente(nom.value,docu.value,tel.value,dir.value,ema.value)}" style="margin-left:150px">
+                    <f:actionListener binding="#{alquilerBean.alquilarItem(item.value ,dias.value)}" />
+                </p:commandButton>
 			</h:panelGrid>
-			<p:commandButton id="submit" value="Registrar" update="clientsForm"  actionListener="#{alquilerBean.agregarCliente(nom.value,docu.value,tel.value,dir.value,ema.value)}" style="margin-left:150px"/>
-
+			
+            
 		</p:panel>
 
 

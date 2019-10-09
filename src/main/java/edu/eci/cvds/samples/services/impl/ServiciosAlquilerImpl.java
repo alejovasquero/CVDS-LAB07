@@ -107,7 +107,7 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
             LocalDate fechaMinimaEntrega=a.getFechafinrenta().toLocalDate();
             LocalDate fechaEntrega=fechaDevolucion.toLocalDate();
             long diasRetraso = ChronoUnit.DAYS.between(fechaMinimaEntrega, fechaEntrega);            
-            return diasRetraso;
+            return diasRetraso*a.getItem().getTarifaxDia();
         } catch (PersistenceException e) {
             throw new ExcepcionServiciosAlquiler("Error al consultar el item rentado: "+ iditem, e);
         }
