@@ -13,4 +13,6 @@ public interface ItemRentadoMapper {
     public ItemRentado getItemRentado(@Param ("ir")int id);
     
 	public void insertItemRentado(@Param ("docu")long docu,@Param ("itemId")int itemId,@Param ("fechaIni")Date fechaIni,@Param ("fechaFin")Date fechaFin);
+
+	public List<ItemRentado> consultarItemsSinDevolver(@Param("doc") long documento);
 }

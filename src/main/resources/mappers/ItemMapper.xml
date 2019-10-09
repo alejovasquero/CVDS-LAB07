@@ -89,6 +89,28 @@
 		update VI_ITEMS set tarifaxdia=#{tarifa} where id=#{id};
 	</update>
 	
+
+
+	<select parameterType="map" id="valorMultaAlquiler" resultMap="ItemResult">
+		select
+		ir.id as itemrentado_id,
+		ir.fechainiciorenta as itemrentado_fechainiciorenta,
+		ir.fechafinrenta as itemrentado_fechafinrenta,
+		i.id as item_id,
+		i.nombre as nombre,
+		i.descripcion as descripcion,
+		i.fechalanzamiento as fechalanzamiento,
+		i.tarifaxdia as tarifaxdia,
+		i.formatorenta as formatorenta,
+		i.genero as genero,        
+		ti.id as tipoitem_id,
+		ti.descripcion as tipoitem_descripcion
+		FROM
+		VI_ITEMRENTADO as ir
+		left join VI_ITEMS as i on ir.ITEMS_id=i.id 
+		left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
+		WHERE #{it}=i.id
+	</select>
 	
 	
 	

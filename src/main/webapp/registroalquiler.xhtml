@@ -34,7 +34,9 @@
         }
 
         
-   
+        .ui-datatable-footer{
+            background-color: #19ee60a4;
+        }
    
    
         .myPanel.ui-panel {
@@ -58,9 +60,10 @@
         
         .ui-datatable-tablewrapper  table thead th{
             border: 1px #ebebeb solid;
-            background: #d6d6d6;
+            background: #55acc7;
             height: 35px;
             text-shadow: black;
+            color:white;
             
         }
 
@@ -112,8 +115,8 @@
             width: 100px;
             height: 10px;
             text-shadow: 2px 2px rgba(0, 183, 255, 0.37);
-            border-radius: 5px;
-            font-size:5px;
+            
+            font-size:15px;
         }
 
         .ui-paginator {
@@ -128,6 +131,9 @@
             width: 60%;
             border: 3px solid rgba(31, 63, 204, 0.582);
             padding: 10px;
+        }
+        .ui-datatable-footer input:hover{
+            background: #c5c5c5;
         }
 
         .ui-datatable-header {
@@ -150,36 +156,52 @@
         .ui-state-default {
             column-span: 2;
         }
+
+        .divider{
+            width:5px;
+            height:auto;
+            display:inline-block;
+}
         </style>
 	 <h:body>
 
 	 <h:form id="clientsForm">
-		 <p:dataTable  var="dato" value="#{alquilerBean.consultarClientes()}" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-					  rows="5" selectionMode="single" id="documento" selection="#{alquilerBean.selectedCliente}" rowKey="#{dato.getDocumento()}">
+		 <p:dataTable  var="item" value="#{alquilerBean.consultarItemsRentadosSinDevolver()}" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+					  rows="5" selectionMode="single" id="documento" rowKey="#{item.id}">
 			 <f:facet name="header">
 				 Clientes
 			 </f:facet>
 			 <p:column headerText="Id">
-				 <h:outputText value="#{dato.getDocumento()}"></h:outputText>
+				 <h:outputText value="#{item.id}"></h:outputText>
 			 </p:column>
-			 <p:column headerText="Nombre">
-				 <h:outputText value="#{dato.getNombre()}"></h:outputText>
+			 <p:column headerText="Item">
+				 <h:outputText value="#{item.item.nombre}"></h:outputText>
 			 </p:column>
-			 <p:column headerText="Telefono">
-				 <h:outputText value="#{dato.getTelefono()}"></h:outputText>
-			 </p:column>
-			 <p:column headerText="Direccion">
-				 <h:outputText value="#{dato.getDireccion()}"></h:outputText>
-			 </p:column>
-			 <p:column headerText="Email">
-				 <h:outputText value="#{dato.getEmail()}"></h:outputText>
-			 </p:column>
+             
+             <p:column headerText="Tarifa por dia">
+				 <h:outputText value="#{item.item.tarifaxDia}"></h:outputText>
+             </p:column>
+
+             <p:column headerText="Descripción">
+				 <h:outputText value="#{item.item.tipo.descripcion}"></h:outputText>
+             </p:column>
+
+             <p:column headerText="Fecha de inicio">
+				 <h:outputText value="#{item.fechainiciorenta}"></h:outputText>
+             </p:column>
+
+             <p:column headerText="Multa">
+				 <h:outputText value="#{alquilerBean.consultarMulta(item.id)}"></h:outputText>
+             </p:column>
+             
+
 			 <f:facet name="footer">
-				 <h:commandButton id="Visualizar" value="Ingresar"  actionListener="registroalquiler?faces-redirect = true"/>
+                <h:button id="Visualizar" value="Ingresar"  outcome="registrocliente"/>    
+             
 			 </f:facet>
 		 </p:dataTable>
-
-		<p:panel id="panel" header="Registrar Nuevo Usuario" styleclass="myPanel" bgcolor="yellow" class="register">
+         <div class="divider"/>
+		<p:panel id="panel" header="Alquilar nuevo item" styleclass="myPanel" bgcolor="yellow" class="register">
 
 			<h:panelGrid id="grid" cellpadding="5" columns="2">
 				<p:outputLabel for="Documento" value="Documento :"/>

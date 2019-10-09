@@ -147,6 +147,6 @@ public interface ServiciosAlquiler {
    public abstract void registrarTipoItem(TipoItem a);
 
 
-   public abstract List<ItemRentado> consultarItemsRentadosSinDevolver();
+   public abstract List<ItemRentado> consultarItemsRentadosSinDevolver(long documento) throws ExcepcionServiciosAlquiler;
 
 }

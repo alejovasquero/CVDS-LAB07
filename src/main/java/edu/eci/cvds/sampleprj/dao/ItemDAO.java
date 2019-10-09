@@ -2,6 +2,7 @@ package edu.eci.cvds.sampleprj.dao;
 
 import edu.eci.cvds.samples.entities.Item;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface ItemDAO {
@@ -17,4 +18,6 @@ public interface ItemDAO {
    public long consultarCostoAlquiler(int iditem, int numdias) throws PersistenceException;
    
    public void actualizarTarifaItem(int id, long tarifa) throws PersistenceException;
+
+   public long consultarMultaAlquiler(int iditem, Date fechaDevolucion)  throws PersistenceException;
 }

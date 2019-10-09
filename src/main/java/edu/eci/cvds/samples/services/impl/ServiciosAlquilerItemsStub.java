@@ -246,7 +246,7 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
     }
 
     @Override
-    public List<ItemRentado> consultarItemsRentadosSinDevolver(){
+    public List<ItemRentado> consultarItemsRentadosSinDevolver(long documento){
         return new ArrayList<ItemRentado>();
     }
 }

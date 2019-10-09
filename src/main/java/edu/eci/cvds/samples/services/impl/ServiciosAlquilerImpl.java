@@ -12,6 +12,8 @@ import edu.eci.cvds.samples.entities.*;
 import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquiler;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -95,7 +97,19 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
     // falta
     @Override
     public long consultarMultaAlquiler(int iditem, Date fechaDevolucion) throws ExcepcionServiciosAlquiler {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            ItemRentado a=itemRentadoDAO.load(iditem);
+            if(a==null || itemRentadoDAO.load(iditem)==null){
+                throw new ExcepcionServiciosAlquiler("No hay información de el item rentado: "+ iditem);
+            }
+            LocalDate fechaMinimaEntrega=a.getFechafinrenta().toLocalDate();
+            LocalDate fechaEntrega=fechaDevolucion.toLocalDate();
+            long diasRetraso = ChronoUnit.DAYS.between(fechaMinimaEntrega, fechaEntrega);            
+            return diasRetraso;
+        } catch (PersistenceException e) {
+            throw new ExcepcionServiciosAlquiler("Error al consultar el item rentado: "+ iditem);
+        }
+        
     }
 
     @Override
@@ -199,7 +213,13 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
         }
     }
     @Override
-    public List<ItemRentado> consultarItemsRentadosSinDevolver(){
-        return new ArrayList<ItemRentado>();
+    public List<ItemRentado> consultarItemsRentadosSinDevolver(long documento) throws ExcepcionServiciosAlquiler {
+        try {
+            if(clienteDAO.load(documento)==null){throw new ExcepcionServiciosAlquiler("No existe el cliente: " + documento);}
+            return itemRentadoDAO.consultarItemsSinDevolver(documento);
+        } catch (PersistenceException e) {
+            throw new ExcepcionServiciosAlquiler("Error al consultar items de: " + documento, e);
+        }
+
     }
 }

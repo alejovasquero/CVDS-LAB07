@@ -24,7 +24,8 @@ public interface ItemMapper {
 	public List<Object> valorMultaRetrasoxDia(@Param("itemId")int id);
     //PREGUNTAR
 
-
+    public abstract long valorMultaAlquiler(@Param("it")int item, @Param("dat")java.sql.Date fecha);
+    
 
     public List<Item> consultarItemsDisponibles();
 	

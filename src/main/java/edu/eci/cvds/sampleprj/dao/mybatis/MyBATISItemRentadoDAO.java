@@ -34,4 +34,15 @@ public class MyBATISItemRentadoDAO implements ItemRentadoDAO{
 			throw new PersistenceException("Error al registrar el alquiler del producto "+itemId+" por el cliente "+docu,e);
 		}
 	}
+
+	@Override
+	public List<ItemRentado> consultarItemsSinDevolver(long documento) throws PersistenceException {
+		try{
+			return itemRentadoMapper.consultarItemsSinDevolver(documento);
+		}catch(org.apache.ibatis.exceptions.PersistenceException e){
+			throw new PersistenceException("Error al consultar items del cliente: "+documento,e);
+		}
+	}
+
+	
 }

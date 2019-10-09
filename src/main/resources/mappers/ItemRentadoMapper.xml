@@ -39,5 +39,25 @@
 	</select>
 
 
+	<select parameterType="map" id='consultarItemsSinDevolver' resultMap="ItemRentadoResult">
+		SELECT
+			ir.id as id,
+			ir.fechainiciorenta as fechainiciorenta,
+			ir.fechafinrenta as fechafinrenta,
+			i.id as itemrentado_item_id,
+			i.nombre as item_nombre,
+			i.descripcion as item_descripcion,
+			i.fechalanzamiento as item_fechalanzamiento,
+			i.tarifaxdia as item_tarifaxdia,
+			i.formatorenta as item_formatorenta,
+			i.genero as item_genero,        
+			ti.id as item_tipoitem_id,
+			ti.descripcion as item_tipoitem_descripcion
+			FROM
+			VI_ITEMRENTADO as ir
+			join VI_ITEMS as i on ir.ITEMS_id=i.id 
+			join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
+			WHERE CURDATE() &gt; ir.fechafinrenta
+	</select>
                 
 </mapper>
