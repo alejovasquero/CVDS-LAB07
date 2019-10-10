@@ -1,7 +1,6 @@
 package edu.eci.cvds.sampleprj.dao.mybatis;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 import org.mybatis.guice.transactional.Transactional;
 
@@ -11,7 +10,6 @@ import edu.eci.cvds.samples.entities.Item;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
 
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.List;
 
 public class MyBATISItemDAO implements ItemDAO {

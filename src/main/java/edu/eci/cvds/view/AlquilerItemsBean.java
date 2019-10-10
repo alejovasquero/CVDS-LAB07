@@ -36,8 +36,8 @@ public class AlquilerItemsBean extends BasePageBean{
 
     public void alquilarItem(int item ,int dias){
         try {
-            Item a= serviciosAlquiler.consultarItem(item);
-            serviciosAlquiler.registrarAlquilerCliente(new java.sql.Date(Calendar.getInstance().getTime().getTime()), selectedCliente.getDocumento(), a, dias);
+            Item a = serviciosAlquiler.consultarItem(item);
+            serviciosAlquiler.registrarAlquilerCliente(new Date(Calendar.getInstance().getTime().getTime()), selectedCliente.getDocumento(), a, dias);
         } catch (Exception e) {
             //TODO: handle exception
         }

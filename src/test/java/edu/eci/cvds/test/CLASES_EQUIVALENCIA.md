@@ -1,6 +1,5 @@
-# CLASES DE EQUIVALENCIA: ServiciosAlquiler.java
+# CLASES DE EQUIVALENCIA ServiciosAlquiler.java
 ## Cada caso de prueba está basado en supuestos de información de la base de datos
-	//Pendiente
 	a) public abstract int valorMultaRetrasoxDia(int itemId) throws ExcepcionServiciosAlquiler;
 		- 1) Excepciones
 		~~~

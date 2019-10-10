@@ -35,7 +35,6 @@ public class ServiciosAlquilerTest {
 
 
     //PRUEBA 1
-
     //public abstract List<ItemRentado> consultarItemsCliente(long idcliente) throws ExcepcionServiciosAlquiler;
 
     @Test
